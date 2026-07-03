@@ -1369,12 +1369,9 @@ td.num-right {
   th { padding: 8px 10px; font-size: 8px; letter-spacing: 0.5px; }
   td { padding: 8px 10px; font-size: 11px; }
 
-  /* ── DISABLE HOVER ON TOUCH ── */
+  /* ── DISABLE HOVER TOOLTIPS ON TOUCH — JS handles tap ── */
   .tpl-hover:hover::after { display: none; }
-  .info-tip:hover::after {
-    max-width: 200px; font-size: 10px;
-    left: 50%; right: auto; transform: translateX(-50%);
-  }
+  .info-tip:hover::after { display: none !important; }
 
   /* ── BAR CHART ── */
   .bar-label { width: 80px; font-size: 10px; }
@@ -1413,7 +1410,29 @@ td.num-right {
   .funnel-stage { height: 40px; font-size: 11px; }
 }
 
-/* (hamburger + mobile-menu styles moved before responsive block) */
+/* ─── MOBILE TAP TOOLTIP (appended to body, never clipped) ─── */
+.mobile-tip {
+  position: fixed;
+  z-index: 9999;
+  background: rgba(21,16,43,0.97);
+  backdrop-filter: blur(16px);
+  -webkit-backdrop-filter: blur(16px);
+  color: white;
+  padding: 12px 16px;
+  border-radius: 12px;
+  font-family: 'Inter', sans-serif;
+  font-size: 13px;
+  font-weight: 400;
+  line-height: 1.5;
+  max-width: calc(100vw - 32px);
+  width: max-content;
+  border: 1px solid rgba(123,104,238,0.2);
+  box-shadow: 0 12px 40px rgba(0,0,0,0.5);
+  pointer-events: none;
+  opacity: 0;
+  transition: opacity 0.2s ease;
+}
+.mobile-tip.show { opacity: 1; }
 
 /* ─── HELPERS ─── */
 .mt-0 { margin-top: 0; }
@@ -2732,6 +2751,68 @@ td.num-right {
   document.addEventListener('keydown', (e) => {
     if (e.key === 'Escape') closePopup();
   });
+
+  /* ── Mobile tap tooltips (info-tip) ── */
+  if ('ontouchstart' in window || navigator.maxTouchPoints > 0) {
+    let activeTip = null;
+
+    function removeTip() {
+      if (activeTip) {
+        activeTip.classList.remove('show');
+        setTimeout(() => { if (activeTip && activeTip.parentNode) activeTip.parentNode.removeChild(activeTip); activeTip = null; }, 200);
+      }
+    }
+
+    document.querySelectorAll('.info-tip').forEach(el => {
+      el.addEventListener('click', (e) => {
+        e.preventDefault();
+        e.stopPropagation();
+        const text = el.getAttribute('data-tip');
+        if (!text) return;
+
+        // If tapping same tip, close it
+        if (activeTip && activeTip.dataset.src === el.getAttribute('data-tip')) {
+          removeTip();
+          return;
+        }
+
+        removeTip();
+
+        const tip = document.createElement('div');
+        tip.className = 'mobile-tip';
+        tip.textContent = text;
+        tip.dataset.src = text;
+        document.body.appendChild(tip);
+
+        // Position: centered above the ⓘ, clamped to viewport
+        const rect = el.getBoundingClientRect();
+        const tipW = tip.offsetWidth;
+        const tipH = tip.offsetHeight;
+        let left = rect.left + rect.width / 2 - tipW / 2;
+        let top = rect.top - tipH - 10;
+
+        // Clamp horizontal
+        if (left < 16) left = 16;
+        if (left + tipW > window.innerWidth - 16) left = window.innerWidth - 16 - tipW;
+        // If no room above, show below
+        if (top < 8) top = rect.bottom + 10;
+
+        tip.style.left = left + 'px';
+        tip.style.top = top + 'px';
+
+        requestAnimationFrame(() => tip.classList.add('show'));
+        activeTip = tip;
+      });
+    });
+
+    // Close on tap anywhere else
+    document.addEventListener('click', (e) => {
+      if (activeTip && !e.target.closest('.info-tip')) removeTip();
+    });
+
+    // Close on scroll
+    window.addEventListener('scroll', removeTip, { passive: true });
+  }
 
   /* ── Drag scroll for roadmap ── */
   const roadmapScroll = document.getElementById('roadmapScroll');
