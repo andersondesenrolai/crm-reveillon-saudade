@@ -2538,6 +2538,9 @@ td.num-right {
       <div class="bcard insight-card insight-green">
         <p><strong>Bot 24/7 cobrindo fins de semana.</strong> Atendimento automatizado nos períodos em que a equipe não está disponível.</p>
       </div>
+      <div class="bcard insight-card insight-green">
+        <p><strong>Tracking granular de email implementado.</strong> Micro-WFs dedicados rastreiam abertura e clique por canal (cadastro + carrinho A/B), alimentando o pipeline automaticamente.</p>
+      </div>
     </div>
 
     <!-- O que precisa melhorar -->
@@ -2550,7 +2553,7 @@ td.num-right {
         <p><strong>Tags de resposta com bug nos WFs de campanha.</strong> Métrica de respostas calculada via cruzamento, não via tag automática.</p>
       </div>
       <div class="bcard insight-card insight-amber">
-        <p><strong>Trigger Links nos emails ainda não configurados.</strong> Necessário para rastrear cliques e alimentar lead scoring via email.</p>
+        <p><strong>Tracking de clique WhatsApp depende de Trigger Links</strong> — não existe "Wait for WA Link Clicked" nativo. Implementar na Onda 2 com templates novos.</p>
       </div>
     </div>
 
@@ -2563,9 +2566,10 @@ td.num-right {
       <div class="week-block">
         <div class="wb-title"><span class="badge">Semana 1</span> 03-09/07</div>
         <ul class="checklist">
-          <li><span class="check check--done">&#x2714;</span>Disparar Mornos (461 leads) — 03/07</li>
+          <li><span class="check check--done">&#x2714;</span>Disparar Mornos (461 leads) — 03/07 ✅ 100% sucesso</li>
           <li><span class="check check--done">&#x2714;</span>Disparar Quentes (528 leads) — 03/07</li>
-          <li><span class="check"></span>Monitorar entregas e respostas</li>
+          <li><span class="check check--done">&#x2714;</span>Tracking email: Waits abertura + micro-WFs clique (cadastro + carrinho)</li>
+          <li><span class="check"></span>Monitorar respostas Mornos/Quentes (48h tracking)</li>
           <li><span class="check"></span>Relatório pós-campanha</li>
         </ul>
       </div>
