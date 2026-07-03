@@ -667,11 +667,12 @@ td.num-right {
   background: rgba(123,104,238,0.08);
   border: 1px solid rgba(123,104,238,0.15);
   color: var(--roxo);
-  width: 28px;
-  height: 28px;
-  border-radius: 50%;
+  width: 32px;
+  height: 32px;
+  border-radius: 8px;
   cursor: pointer;
-  font-size: 12px;
+  font-size: 18px;
+  line-height: 1;
   display: flex;
   align-items: center;
   justify-content: center;
@@ -1233,90 +1234,112 @@ td.num-right {
 }
 
 @media (max-width: 768px) {
-  /* Navbar — horizontal scroll instead of wrap */
+  /* Navbar — hamburger mode */
   .navbar {
-    top: 8px; padding: 4px 10px; height: auto;
-    border-radius: 16px; max-width: calc(100% - 16px);
-    overflow-x: auto; scrollbar-width: none; flex-wrap: nowrap;
+    top: 8px; padding: 0 14px; height: 40px;
+    border-radius: var(--pill); max-width: calc(100% - 24px);
   }
-  .navbar::-webkit-scrollbar { display: none; }
-  .navbar-logo img { height: 16px; flex-shrink: 0; }
-  .navbar-tabs { flex-wrap: nowrap; gap: 0; margin-left: 8px; flex-shrink: 0; }
-  .tab-btn { font-size: 10px; padding: 6px 8px; flex-shrink: 0; }
+  .navbar-logo img { height: 16px; }
+  .navbar-tabs { display: none; }
   .navbar-date { display: none; }
+  .hamburger { display: flex; }
 
   /* Sections */
-  .section-inner { padding: 24px 16px 48px; }
-  .tab-content:not(#tab-cover) { padding-top: 72px; }
+  .section-inner { padding: 20px 16px 40px; }
+  .tab-content:not(#tab-cover) { padding-top: 64px; }
 
   /* Cover */
-  .cover { min-height: auto; padding: 72px 16px 40px; }
-  .cover-title { font-size: 24px; }
-  .cover-subtitle { font-size: 13px; }
+  .cover { min-height: auto; padding: 64px 16px 32px; }
+  .cover-title { font-size: 22px; }
+  .cover-subtitle { font-size: 12px; }
   .cover-logos { gap: 10px; flex-wrap: wrap; justify-content: center; }
-  .cover-logo { height: 28px; }
-  .cover-logo-today { height: 30px; }
+  .cover-logo { height: 26px; }
+  .cover-logo-today { height: 28px; }
   .cover-metrics { grid-template-columns: 1fr 1fr; gap: 10px; }
-  .cover-metric { padding: 16px 12px; }
-  .cover-metric .cm-value { font-size: 28px; }
-  .cover-metric .cm-label { font-size: 11px; }
+  .cover-metric { padding: 14px 10px; }
+  .cover-metric .cm-value { font-size: 26px; }
+  .cover-metric .cm-label { font-size: 10px; }
 
-  /* Grids */
+  /* Grids — all 2 cols or 1 col */
   .metric-grid--5,
   .metric-grid--4,
-  .metric-grid--3 { grid-template-columns: repeat(2, 1fr); }
-  .grid-3, .grid-4 { grid-template-columns: 1fr; }
-  .grid-2 { grid-template-columns: 1fr; }
-  .infra-grid { grid-template-columns: 1fr 1fr; }
+  .metric-grid--3 { grid-template-columns: repeat(2, 1fr); gap: 10px; }
+  .grid-3, .grid-4, .grid-2 { grid-template-columns: 1fr; }
+  .infra-grid { grid-template-columns: 1fr 1fr; gap: 10px; }
   .roi-grid { grid-template-columns: 1fr !important; }
   .revenue-grid { grid-template-columns: 1fr; }
 
-  /* Cards */
-  .bcard { padding: 16px; }
+  /* Cards — FIX overflow micro-scrolls */
+  .bcard {
+    padding: 14px;
+    overflow: hidden;
+  }
+  /* Only table-wrapper bcards get scroll */
+  .bcard:has(table) {
+    overflow-x: auto;
+    -webkit-overflow-scrolling: touch;
+  }
 
   /* Roadmap timeline */
-  .roadmap-card { padding: 20px 16px; }
-  .roadmap-item { width: 100px; }
-  .roadmap-title { font-size: 11px; }
+  .roadmap-card { padding: 16px 12px; overflow: hidden; }
+  .roadmap-card .roadmap-scroll { overflow-x: auto; }
+  .roadmap-item { width: 90px; }
+  .roadmap-title { font-size: 10px; }
   .roadmap-desc { font-size: 9px; }
-  .roadmap-date { font-size: 10px; padding: 2px 8px; }
+  .roadmap-date { font-size: 9px; padding: 2px 7px; }
+  .rm-arrow {
+    width: 32px; height: 32px; font-size: 14px;
+    border-radius: 8px;
+  }
 
-  /* Pipeline */
-  .funnel-bar { font-size: 12px; padding: 12px; }
+  /* Funnel — key fix: text inside bars */
+  .funnel { max-width: 100%; }
+  .funnel-stage {
+    font-size: 11px;
+    height: 44px;
+    gap: 8px;
+    padding: 0 8px;
+    min-width: 0;
+  }
+  .funnel-stage .fs-name { font-size: 11px; white-space: nowrap; overflow: hidden; text-overflow: ellipsis; max-width: 90px; }
+  .funnel-stage .fs-count { font-size: 13px; }
+  .funnel-stage .fs-pct { font-size: 10px; }
 
-  /* Tables — horizontal scroll */
-  table { font-size: 11px; }
-  th { padding: 8px 10px; font-size: 9px; }
-  td { padding: 10px; font-size: 11px; }
-  .bcard { overflow-x: auto; -webkit-overflow-scrolling: touch; }
-  table { min-width: 600px; }
+  /* Tables — scrollable inside card */
+  table { font-size: 11px; min-width: 500px; }
+  th { padding: 8px 10px; font-size: 8px; letter-spacing: 0.5px; }
+  td { padding: 8px 10px; font-size: 11px; }
 
-  /* Template hover — left-aligned, contained */
-  .tpl-hover:hover::after { left: 0; max-width: 220px; }
+  /* Template hover — disable on touch (doesn't work well) */
+  .tpl-hover:hover::after { display: none; }
 
   /* Bar chart */
-  .bar-label { width: 90px; font-size: 10px; }
+  .bar-label { width: 80px; font-size: 10px; }
 
   /* Recovery */
   .recovery-highlight { grid-column: span 1; flex-direction: column; gap: 12px; }
 
-  /* Regua */
-  .regua { gap: 8px; }
-  .regua-step { min-width: 60px; }
-  .regua-icon { width: 36px; height: 36px; font-size: 16px; }
+  /* Regua — scrollable */
+  .regua { gap: 6px; overflow-x: auto; flex-wrap: nowrap; padding-bottom: 8px; }
+  .regua-step { min-width: 70px; flex-shrink: 0; }
+  .regua-icon { width: 32px; height: 32px; font-size: 14px; }
 
   /* Headings */
-  h2 { font-size: 22px; }
-  h3 { font-size: 16px; }
+  h2 { font-size: 20px; }
+  h3 { font-size: 15px; }
 
   /* Timeline popup */
   .timeline-popup { padding: 20px; width: 95%; max-width: none; }
 
-  /* Tooltips */
-  .info-tip:hover::after { max-width: 180px; font-size: 10px; left: auto; right: 0; transform: none; }
+  /* Tooltips — position fix */
+  .info-tip:hover::after {
+    max-width: 200px; font-size: 10px;
+    left: 50%; right: auto;
+    transform: translateX(-50%);
+  }
 
-  /* Metric values with Aprox. */
-  .metric-value { font-size: 28px; }
+  /* Metric values */
+  .metric-value { font-size: 24px; }
 
   /* Week blocks / checklist */
   .checklist li { font-size: 13px; }
@@ -1324,36 +1347,101 @@ td.num-right {
 
   /* Notes */
   .note { font-size: 11px; }
+
+  /* Subsection title spacing after cards */
+  .subsection-title { margin-top: 32px; }
 }
 
 @media (max-width: 480px) {
-  .cover-title { font-size: 20px; }
-  .cover-metrics { grid-template-columns: 1fr; }
-  .cover-metric .cm-value { font-size: 32px; }
+  .cover-title { font-size: 18px; }
+  .cover-metrics { grid-template-columns: 1fr; gap: 8px; }
+  .cover-metric .cm-value { font-size: 28px; }
+  .cover-metric { padding: 12px 10px; }
   .metric-grid--5,
   .metric-grid--4,
-  .metric-grid--3 { grid-template-columns: 1fr; }
+  .metric-grid--3 { grid-template-columns: 1fr; gap: 8px; }
   .infra-grid { grid-template-columns: 1fr; }
-  .tab-btn { font-size: 9px; padding: 5px 6px; }
-  h2 { font-size: 20px; }
-  h3 { font-size: 15px; }
-  .section-inner { padding: 16px 12px 40px; }
-  .tab-content:not(#tab-cover) { padding-top: 64px; }
-  .cover { padding: 64px 12px 32px; }
-
-  /* Metric cards */
-  .metric-value { font-size: 24px; }
-  .bcard { padding: 14px; }
+  h2 { font-size: 18px; }
+  h3 { font-size: 14px; }
+  .section-inner { padding: 16px 12px 32px; }
+  .tab-content:not(#tab-cover) { padding-top: 56px; }
+  .cover { padding: 56px 12px 28px; }
+  .bcard { padding: 12px; }
+  .metric-value { font-size: 22px; }
 
   /* Roadmap */
-  .roadmap-item { width: 85px; }
+  .roadmap-item { width: 80px; }
   .roadmap-dot { width: 10px; height: 10px; }
-  .roadmap-title { font-size: 10px; max-width: 80px; }
+  .roadmap-title { font-size: 9px; max-width: 75px; }
   .roadmap-desc { display: none; }
 
-  /* Pipeline */
-  .funnel-bar { font-size: 11px; padding: 10px; }
-  .funnel-bar .fb-count { font-size: 13px; }
+  /* Funnel — stack text vertically if needed */
+  .funnel-stage { height: 40px; font-size: 10px; gap: 6px; }
+  .funnel-stage .fs-name { max-width: 70px; font-size: 10px; }
+  .funnel-stage .fs-count { font-size: 12px; }
+  .funnel-stage .fs-pct { font-size: 9px; }
+}
+
+/* ─── HAMBURGER + MOBILE MENU ─── */
+.hamburger {
+  display: none;
+  flex-direction: column;
+  gap: 4px;
+  background: none;
+  border: none;
+  cursor: pointer;
+  padding: 6px;
+  flex-shrink: 0;
+}
+.hamburger span {
+  display: block;
+  width: 18px;
+  height: 2px;
+  background: rgba(255,255,255,0.7);
+  border-radius: 2px;
+  transition: all 0.25s ease;
+}
+.hamburger.open span:nth-child(1) { transform: rotate(45deg) translate(4px, 4px); }
+.hamburger.open span:nth-child(2) { opacity: 0; }
+.hamburger.open span:nth-child(3) { transform: rotate(-45deg) translate(4px, -4px); }
+
+.mobile-menu {
+  display: none;
+  position: fixed;
+  top: 56px;
+  left: 50%;
+  transform: translateX(-50%);
+  z-index: 99;
+  background: rgba(21, 16, 43, 0.95);
+  backdrop-filter: blur(24px);
+  -webkit-backdrop-filter: blur(24px);
+  border: 1px solid rgba(123,104,238,0.15);
+  border-radius: 16px;
+  padding: 8px;
+  flex-direction: column;
+  gap: 2px;
+  width: calc(100% - 32px);
+  max-width: 300px;
+  box-shadow: 0 12px 40px rgba(0,0,0,0.5);
+}
+.mobile-menu.open { display: flex; }
+
+.mm-btn {
+  font-family: 'Inter', sans-serif;
+  font-size: 14px;
+  font-weight: 500;
+  color: rgba(255,255,255,0.6);
+  background: none;
+  border: none;
+  padding: 12px 16px;
+  border-radius: 10px;
+  cursor: pointer;
+  text-align: left;
+  transition: all 0.2s ease;
+}
+.mm-btn:hover, .mm-btn.active {
+  color: var(--white);
+  background: rgba(123,104,238,0.12);
 }
 
 /* ─── HELPERS ─── */
@@ -1410,7 +1498,18 @@ td.num-right {
     <button class="tab-btn" data-tab="insights">Insights</button>
   </div>
   <div class="navbar-date">03/07/2026</div>
+  <button class="hamburger" id="hamburgerBtn" aria-label="Menu">
+    <span></span><span></span><span></span>
+  </button>
 </nav>
+<div class="mobile-menu" id="mobileMenu">
+  <button class="mm-btn active" data-tab="capa">Capa</button>
+  <button class="mm-btn" data-tab="setup">Setup</button>
+  <button class="mm-btn" data-tab="pipeline">Pipeline</button>
+  <button class="mm-btn" data-tab="campanhas">Campanhas</button>
+  <button class="mm-btn" data-tab="carrinho">Recuperação</button>
+  <button class="mm-btn" data-tab="insights">Insights</button>
+</div>
 
 <!-- ════════════════════════ TIMELINE POPUP ════════════════════════ -->
 <div class="timeline-overlay" id="timelineOverlay"></div>
@@ -1537,8 +1636,8 @@ td.num-right {
       </div>
 
       <div class="roadmap-arrows">
-        <button class="rm-arrow" onclick="document.getElementById('roadmapScroll').scrollBy({left:-200,behavior:'smooth'})">&larr;</button>
-        <button class="rm-arrow" onclick="document.getElementById('roadmapScroll').scrollBy({left:200,behavior:'smooth'})">&rarr;</button>
+        <button class="rm-arrow" onclick="document.getElementById('roadmapScroll').scrollBy({left:-200,behavior:'smooth'})">&#x2039;</button>
+        <button class="rm-arrow" onclick="document.getElementById('roadmapScroll').scrollBy({left:200,behavior:'smooth'})">&#x203A;</button>
       </div>
     </div>
 
@@ -2525,20 +2624,35 @@ td.num-right {
 (function() {
   /* ── Tab Navigation ── */
   const tabs = document.querySelectorAll('.tab-btn');
+  const mmBtns = document.querySelectorAll('.mm-btn');
   const contents = document.querySelectorAll('.tab-content');
+  const hamburger = document.getElementById('hamburgerBtn');
+  const mobileMenu = document.getElementById('mobileMenu');
 
-  tabs.forEach(btn => {
-    btn.addEventListener('click', () => {
-      const target = btn.dataset.tab;
-      tabs.forEach(t => t.classList.remove('active'));
-      btn.classList.add('active');
-      contents.forEach(c => {
-        c.classList.remove('active');
-        if (c.id === target) c.classList.add('active');
-      });
-      window.scrollTo({ top: 0, behavior: 'smooth' });
+  function switchTab(target) {
+    tabs.forEach(t => t.classList.remove('active'));
+    mmBtns.forEach(t => t.classList.remove('active'));
+    document.querySelectorAll(`[data-tab="${target}"]`).forEach(t => t.classList.add('active'));
+    contents.forEach(c => {
+      c.classList.remove('active');
+      if (c.id === target) c.classList.add('active');
     });
-  });
+    // Close mobile menu
+    if (mobileMenu) mobileMenu.classList.remove('open');
+    if (hamburger) hamburger.classList.remove('open');
+    window.scrollTo({ top: 0, behavior: 'smooth' });
+  }
+
+  tabs.forEach(btn => btn.addEventListener('click', () => switchTab(btn.dataset.tab)));
+  mmBtns.forEach(btn => btn.addEventListener('click', () => switchTab(btn.dataset.tab)));
+
+  // Hamburger toggle
+  if (hamburger) {
+    hamburger.addEventListener('click', () => {
+      hamburger.classList.toggle('open');
+      mobileMenu.classList.toggle('open');
+    });
+  }
 
   /* ── Timeline Popup ── */
   const timelineData = [
