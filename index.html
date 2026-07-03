@@ -436,7 +436,6 @@ td.num-right {
   justify-content: center;
   text-align: center;
   padding: 64px 32px;
-  background: var(--gradient-dark);
   position: relative;
 }
 
@@ -1373,8 +1372,8 @@ td.num-right {
   .tpl-hover:hover::after { display: none; }
   .info-tip:hover::after { display: none !important; }
 
-  /* ── BAR CHART ── */
-  .bar-label { width: 80px; font-size: 10px; }
+  /* ── BAR CHART — wider labels so bars don't overlap text ── */
+  .bar-label { width: 130px; min-width: 130px; font-size: 10px; flex-shrink: 0; }
 
   /* ── RECOVERY ── */
   .recovery-highlight { grid-column: span 1; flex-direction: column; gap: 12px; }
@@ -1820,10 +1819,10 @@ td.num-right {
       </div>
       <div class="bcard movement-card">
         <div class="mc-title">&rarr; Comprou (<span class="num">223</span>)</div>
-        <div class="mc-item">Base pre-setup <span class="num">47%</span></div>
-        <div class="mc-item">De Engajado <span class="num">38%</span></div>
-        <div class="mc-item">De Interessado <span class="num">12%</span></div>
-        <div class="mc-item">Direto <span class="num">3%</span></div>
+        <div class="mc-item">Base pre-setup <span class="info-tip" data-tip="Compradores que vieram antes do CRM estar configurado — compras anteriores ao setup de jun/26.">&#x24D8;</span> <span class="num">47%</span></div>
+        <div class="mc-item">De Engajado <span class="info-tip" data-tip="Compradores que estavam na etapa Engajado — demonstraram atenção às comunicações mas ainda não tinham clicado em link de compra.">&#x24D8;</span> <span class="num">38%</span></div>
+        <div class="mc-item">De Interessado <span class="info-tip" data-tip="Compradores que estavam na etapa Interessado — já tinham clicado em link de compra, demonstrando intenção.">&#x24D8;</span> <span class="num">12%</span></div>
+        <div class="mc-item">Direto <span class="info-tip" data-tip="Compradores que não estavam na base antes da compra — vieram por indicação, promoter ou canal externo.">&#x24D8;</span> <span class="num">3%</span></div>
       </div>
     </div>
 
@@ -2264,6 +2263,7 @@ td.num-right {
             <th>Campanha</th>
             <th>Tipo msg</th>
             <th style="text-align:right">Impressões <span class="info-tip" data-tip="Total de mensagens/emails enviados — cada envio conta como 1 impressão.">&#x24D8;</span></th>
+            <th style="text-align:right">Resposta / Abertura <span class="info-tip" data-tip="WhatsApp: taxa de resposta. Email: taxa de abertura estimada.">&#x24D8;</span></th>
             <th style="text-align:right">Custo est.</th>
           </tr>
         </thead>
@@ -2273,6 +2273,7 @@ td.num-right {
             <td>Frios (A–E)</td>
             <td><span class="badge badge--neutral" style="font-size:10px; padding:3px 8px;">Utility</span></td>
             <td class="num-right">8.017</td>
+            <td class="num-right" style="color: var(--green);">9,3%</td>
             <td class="num-right">Aprox. R$ 802</td>
           </tr>
           <tr>
@@ -2280,6 +2281,7 @@ td.num-right {
             <td>Carrinho abandonado</td>
             <td><span class="badge" style="font-size:10px; padding:3px 8px;">Marketing</span></td>
             <td class="num-right">40</td>
+            <td class="num-right" style="color: var(--green);">10%</td>
             <td class="num-right">Aprox. R$ 12</td>
           </tr>
           <tr>
@@ -2287,6 +2289,7 @@ td.num-right {
             <td>Mornos #1</td>
             <td><span class="badge" style="font-size:10px; padding:3px 8px;">Marketing</span></td>
             <td class="num-right">461</td>
+            <td class="num-right">pendente</td>
             <td class="num-right">Aprox. R$ 138</td>
           </tr>
           <tr>
@@ -2294,6 +2297,7 @@ td.num-right {
             <td>Quentes #1</td>
             <td><span class="badge" style="font-size:10px; padding:3px 8px;">Marketing</span></td>
             <td class="num-right">528</td>
+            <td class="num-right">pendente</td>
             <td class="num-right">Aprox. R$ 158</td>
           </tr>
           <tr>
@@ -2301,12 +2305,14 @@ td.num-right {
             <td>Confirmação cadastro</td>
             <td><span class="badge badge--neutral" style="font-size:10px; padding:3px 8px;">Auto</span></td>
             <td class="num-right">1.009</td>
+            <td class="num-right" style="color: var(--green);">~87,4%</td>
             <td class="num-right">R$ 0</td>
           </tr>
           <tr>
             <td>Email</td>
             <td>Recuperação carrinho</td>
             <td><span class="badge badge--neutral" style="font-size:10px; padding:3px 8px;">Auto</span></td>
+            <td class="num-right">—</td>
             <td class="num-right">—</td>
             <td class="num-right">R$ 0</td>
           </tr>
@@ -2315,6 +2321,7 @@ td.num-right {
           <tr>
             <td colspan="3" style="font-weight: 600; color: rgba(255,255,255,0.6);">Total</td>
             <td class="num-right" style="font-weight: 600;">10.055+ impressões</td>
+            <td class="num-right" style="font-weight: 600;"></td>
             <td class="num-right" style="font-weight: 600;">Aprox. R$ 1.110</td>
           </tr>
         </tfoot>
@@ -2410,8 +2417,8 @@ td.num-right {
         <thead>
           <tr>
             <th>Caminho</th>
-            <th>Família A</th>
-            <th>Família B</th>
+            <th>Template A</th>
+            <th>Template B</th>
             <th>Total</th>
           </tr>
         </thead>
