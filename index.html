@@ -1224,6 +1224,74 @@ td.num-right {
   margin: 48px 0;
 }
 
+/* ─── HAMBURGER + MOBILE MENU (base — must be BEFORE responsive overrides) ─── */
+.hamburger {
+  display: none;
+  flex-direction: column;
+  gap: 4px;
+  background: none;
+  border: none;
+  cursor: pointer;
+  padding: 6px;
+  flex-shrink: 0;
+}
+.hamburger span {
+  display: block;
+  width: 18px;
+  height: 2px;
+  background: rgba(255,255,255,0.7);
+  border-radius: 2px;
+  transition: all 0.25s ease;
+}
+.hamburger.open span:nth-child(1) { transform: rotate(45deg) translate(4px, 4px); }
+.hamburger.open span:nth-child(2) { opacity: 0; }
+.hamburger.open span:nth-child(3) { transform: rotate(-45deg) translate(4px, -4px); }
+
+.mobile-menu {
+  display: none;
+  position: fixed;
+  top: 56px;
+  left: 50%;
+  transform: translateX(-50%);
+  z-index: 99;
+  background: rgba(21, 16, 43, 0.95);
+  backdrop-filter: blur(24px);
+  -webkit-backdrop-filter: blur(24px);
+  border: 1px solid rgba(123,104,238,0.15);
+  border-radius: 16px;
+  padding: 8px;
+  flex-direction: column;
+  gap: 2px;
+  width: calc(100% - 32px);
+  max-width: 300px;
+  box-shadow: 0 12px 40px rgba(0,0,0,0.5);
+}
+.mobile-menu.open { display: flex; }
+
+.mm-btn {
+  font-family: 'Inter', sans-serif;
+  font-size: 14px;
+  font-weight: 500;
+  color: rgba(255,255,255,0.6);
+  background: none;
+  border: none;
+  padding: 12px 16px;
+  border-radius: 10px;
+  cursor: pointer;
+  text-align: left;
+  transition: all 0.2s ease;
+}
+.mm-btn:hover, .mm-btn.active {
+  color: var(--white);
+  background: rgba(123,104,238,0.12);
+}
+
+/* ─── TABLE SCROLL WRAPPER ─── */
+.table-scroll {
+  overflow-x: auto;
+  -webkit-overflow-scrolling: touch;
+}
+
 /* ─── RESPONSIVE ─── */
 @media (max-width: 1100px) {
   .infra-grid { grid-template-columns: repeat(2, 1fr); }
@@ -1236,7 +1304,6 @@ td.num-right {
 
 @media (max-width: 768px) {
   /* ── GLOBAL CONTAINMENT ── */
-  *, *::before, *::after { max-width: 100%; }
   body { overflow-x: hidden; }
 
   /* ── NAVBAR — only logo, click to expand ── */
@@ -1276,8 +1343,9 @@ td.num-right {
   .roi-grid { grid-template-columns: 1fr !important; }
   .revenue-grid { grid-template-columns: 1fr; }
 
-  /* ── CARDS — no micro-scroll ── */
-  .bcard { padding: 14px; overflow-x: auto; -webkit-overflow-scrolling: touch; }
+  /* ── CARDS — hide bracket corners + prevent micro-scroll ── */
+  .bcard { padding: 14px; overflow: hidden; }
+  .bcard::before, .bcard::after { display: none; }
 
   /* ── ROADMAP ── */
   .roadmap-card { padding: 16px 12px; }
@@ -1345,67 +1413,7 @@ td.num-right {
   .funnel-stage { height: 40px; font-size: 11px; }
 }
 
-/* ─── HAMBURGER + MOBILE MENU ─── */
-.hamburger {
-  display: none;
-  flex-direction: column;
-  gap: 4px;
-  background: none;
-  border: none;
-  cursor: pointer;
-  padding: 6px;
-  flex-shrink: 0;
-}
-.hamburger span {
-  display: block;
-  width: 18px;
-  height: 2px;
-  background: rgba(255,255,255,0.7);
-  border-radius: 2px;
-  transition: all 0.25s ease;
-}
-.hamburger.open span:nth-child(1) { transform: rotate(45deg) translate(4px, 4px); }
-.hamburger.open span:nth-child(2) { opacity: 0; }
-.hamburger.open span:nth-child(3) { transform: rotate(-45deg) translate(4px, -4px); }
-
-.mobile-menu {
-  display: none;
-  position: fixed;
-  top: 56px;
-  left: 50%;
-  transform: translateX(-50%);
-  z-index: 99;
-  background: rgba(21, 16, 43, 0.95);
-  backdrop-filter: blur(24px);
-  -webkit-backdrop-filter: blur(24px);
-  border: 1px solid rgba(123,104,238,0.15);
-  border-radius: 16px;
-  padding: 8px;
-  flex-direction: column;
-  gap: 2px;
-  width: calc(100% - 32px);
-  max-width: 300px;
-  box-shadow: 0 12px 40px rgba(0,0,0,0.5);
-}
-.mobile-menu.open { display: flex; }
-
-.mm-btn {
-  font-family: 'Inter', sans-serif;
-  font-size: 14px;
-  font-weight: 500;
-  color: rgba(255,255,255,0.6);
-  background: none;
-  border: none;
-  padding: 12px 16px;
-  border-radius: 10px;
-  cursor: pointer;
-  text-align: left;
-  transition: all 0.2s ease;
-}
-.mm-btn:hover, .mm-btn.active {
-  color: var(--white);
-  background: rgba(123,104,238,0.12);
-}
+/* (hamburger + mobile-menu styles moved before responsive block) */
 
 /* ─── HELPERS ─── */
 .mt-0 { margin-top: 0; }
@@ -1651,7 +1659,8 @@ td.num-right {
 
     <!-- Workflows Table -->
     <h3 class="subsection-title mt-48">Workflows por Categoria</h3>
-    <div class="bcard mt-16" style="padding:0; overflow:hidden;">
+    <div class="bcard mt-16" style="padding:0;">
+      <div class="table-scroll">
       <table>
         <thead>
           <tr>
@@ -1703,6 +1712,7 @@ td.num-right {
           </tr>
         </tbody>
       </table>
+      </div>
     </div>
   </div>
 </section>
@@ -1886,7 +1896,8 @@ td.num-right {
     </div>
 
     <!-- Performance Table -->
-    <div class="bcard mt-24" style="padding:0; overflow:hidden;">
+    <div class="bcard mt-24" style="padding:0;">
+      <div class="table-scroll">
       <table>
         <thead>
           <tr>
@@ -1962,6 +1973,7 @@ td.num-right {
           </tr>
         </tfoot>
       </table>
+      </div>
     </div>
     <p class="note">Campanha D: disparo inicial interrompido por saldo em 28/06 (98 enviados). Redisparado em 01/07 — total consolidado: 2.008 enviados, 198 respostas (9,9%).</p>
 
@@ -2041,7 +2053,8 @@ td.num-right {
       </div>
     </div>
 
-    <div class="bcard mt-16" style="padding:0; overflow:hidden;">
+    <div class="bcard mt-16" style="padding:0;">
+      <div class="table-scroll">
       <table>
         <thead>
           <tr>
@@ -2066,6 +2079,7 @@ td.num-right {
           </tr>
         </tbody>
       </table>
+      </div>
     </div>
     <p class="note">Disparo agendado: 03/07 10:00 AM · Ritmo: 50/5min (~45min total)</p>
 
@@ -2094,7 +2108,8 @@ td.num-right {
       </div>
     </div>
 
-    <div class="bcard mt-16" style="padding:0; overflow:hidden;">
+    <div class="bcard mt-16" style="padding:0;">
+      <div class="table-scroll">
       <table>
         <thead>
           <tr>
@@ -2119,6 +2134,7 @@ td.num-right {
           </tr>
         </tbody>
       </table>
+      </div>
     </div>
     <p class="note">Disparo agendado: 03/07 02:00 PM · Ritmo: 50/5min (~55min total)</p>
 
@@ -2176,7 +2192,8 @@ td.num-right {
       </div>
     </div>
 
-    <div class="bcard mt-16" style="padding:0; overflow:hidden;">
+    <div class="bcard mt-16" style="padding:0;">
+      <div class="table-scroll">
       <table>
         <thead>
           <tr>
@@ -2207,6 +2224,7 @@ td.num-right {
           </tr>
         </tbody>
       </table>
+      </div>
     </div>
     <p class="note">Teste A/B — ambas variantes disparam automaticamente via workflow de carrinho abandonado. Métricas serão atualizadas conforme os disparos acontecem.</p>
 
@@ -2216,7 +2234,8 @@ td.num-right {
     <h3 class="subsection-title">Resumo Consolidado</h3>
     <p class="text-sm text-muted mb-16">Visão geral de todos os disparos do período — WhatsApp e Email.</p>
 
-    <div class="bcard mt-16" style="padding:0; overflow:hidden;">
+    <div class="bcard mt-16" style="padding:0;">
+      <div class="table-scroll">
       <table>
         <thead>
           <tr>
@@ -2279,6 +2298,7 @@ td.num-right {
           </tr>
         </tfoot>
       </table>
+      </div>
     </div>
     <p class="note">Custos de WhatsApp são estimativas baseadas no preço por mensagem da Meta. Email não tem custo adicional na plataforma.</p>
   </div>
@@ -2363,7 +2383,8 @@ td.num-right {
 
     <!-- WA Results -->
     <h3 class="subsection-title mt-48">Resultados WhatsApp</h3>
-    <div class="bcard mt-16" style="padding:0; overflow:hidden;">
+    <div class="bcard mt-16" style="padding:0;">
+      <div class="table-scroll">
       <table>
         <thead>
           <tr>
@@ -2394,11 +2415,13 @@ td.num-right {
           </tr>
         </tbody>
       </table>
+      </div>
     </div>
 
     <!-- Conversoes -->
     <h3 class="subsection-title mt-48">Conversões Confirmadas</h3>
-    <div class="bcard mt-16" style="padding:0; overflow:hidden;">
+    <div class="bcard mt-16" style="padding:0;">
+      <div class="table-scroll">
       <table>
         <thead>
           <tr>
@@ -2430,6 +2453,7 @@ td.num-right {
           </tr>
         </tbody>
       </table>
+      </div>
     </div>
 
     <!-- Importação recente -->
@@ -2536,7 +2560,8 @@ td.num-right {
 
     <!-- Pendencias -->
     <h3 class="subsection-title">Pendências Operacionais</h3>
-    <div class="bcard mt-16" style="padding:0; overflow:hidden;">
+    <div class="bcard mt-16" style="padding:0;">
+      <div class="table-scroll">
       <table>
         <thead>
           <tr>
@@ -2571,6 +2596,7 @@ td.num-right {
           </tr>
         </tbody>
       </table>
+      </div>
     </div>
   </div>
 </section>
