@@ -2165,19 +2165,20 @@ td.num-right {
 
     <div class="metric-grid metric-grid--4 mt-16">
       <div class="bcard metric-card">
-        <div class="metric-value num">1.003</div>
-        <div class="metric-label">Emails enviados <span class="info-tip" data-tip="Total de emails de confirmação de cadastro disparados automaticamente pelo workflow.">&#x24D8;</span></div>
+        <div class="metric-value num">1.009</div>
+        <div class="metric-label">Emails enviados <span class="info-tip" data-tip="Total de emails de confirmação de cadastro disparados automaticamente pelo workflow. O workflow tem 9.037 inscritos, mas o passo de email foi adicionado após o setup — apenas cadastros realizados a partir de jun/26 receberam o email.">&#x24D8;</span></div>
       </div>
       <div class="bcard metric-card">
-        <div class="metric-value metric-value--green num" style="color:rgba(255,255,255,0.35);">—</div>
-        <div class="metric-label">Abriram <span class="info-tip" data-tip="Contatos únicos que abriram o email de confirmação. Aguardando confirmação da plataforma.">&#x24D8;</span></div>
+        <div class="metric-value num" style="color: var(--green);">~882</div>
+        <div class="metric-sub" style="font-size:11px; color:rgba(255,255,255,0.45); margin-top:2px;">~87,4%</div>
+        <div class="metric-label">Abriram <span class="info-tip" data-tip="Aproximação via cruzamento de tags (email_enviado ∩ abriu_ultimo_email). Tag de abertura específica deste email será implementada no WF.">&#x24D8;</span></div>
       </div>
       <div class="bcard metric-card">
-        <div class="metric-value metric-value--roxo num">92</div>
-        <div class="metric-label">Clicaram no ingresso <span class="info-tip" data-tip="Contatos que clicaram no link de compra de ingresso dentro do email.">&#x24D8;</span></div>
+        <div class="metric-value metric-value--roxo num">94</div>
+        <div class="metric-label">Clicaram no ingresso <span class="info-tip" data-tip="Contatos com tag clicou_ingresso — clique no link de compra em qualquer canal (email, WA). Tag geral, não exclusiva deste email.">&#x24D8;</span></div>
       </div>
       <div class="bcard metric-card">
-        <div class="metric-value num">109</div>
+        <div class="metric-value num">111</div>
         <div class="metric-label">Clicaram em link (30d) <span class="info-tip" data-tip="Contatos que clicaram em qualquer link de email nos últimos 30 dias.">&#x24D8;</span></div>
       </div>
       <div class="bcard metric-card">
@@ -2185,6 +2186,7 @@ td.num-right {
         <div class="metric-label">Descadastrados <span class="info-tip" data-tip="Contatos que pediram opt-out de emails.">&#x24D8;</span></div>
       </div>
     </div>
+    <p class="note mt-16" style="font-size:12px; font-style:italic; color:rgba(255,255,255,0.4);">Nota: o workflow de cadastro tem 9.037 inscritos, mas o passo de envio de email foi adicionado após o setup inicial do CRM — apenas os 1.009 cadastros realizados a partir de jun/26 receberam o email de confirmação.</p>
 
     <div class="divider"></div>
 
@@ -2298,7 +2300,7 @@ td.num-right {
             <td>Email</td>
             <td>Confirmação cadastro</td>
             <td><span class="badge badge--neutral" style="font-size:10px; padding:3px 8px;">Auto</span></td>
-            <td class="num-right">1.003</td>
+            <td class="num-right">1.009</td>
             <td class="num-right">R$ 0</td>
           </tr>
           <tr>
@@ -2312,7 +2314,7 @@ td.num-right {
         <tfoot>
           <tr>
             <td colspan="3" style="font-weight: 600; color: rgba(255,255,255,0.6);">Total</td>
-            <td class="num-right" style="font-weight: 600;">10.049+ impressões</td>
+            <td class="num-right" style="font-weight: 600;">10.055+ impressões</td>
             <td class="num-right" style="font-weight: 600;">Aprox. R$ 1.110</td>
           </tr>
         </tfoot>
