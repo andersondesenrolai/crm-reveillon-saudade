@@ -232,6 +232,7 @@ main {
 /* ─── BCARD VARIANTS ─── */
 .bcard.insight-green { border-left: 3px solid var(--green); }
 .bcard.insight-amber { border-left: 3px solid var(--amber); }
+.bcard.insight-red { border-left: 3px solid var(--red); }
 
 /* ─── PIPELINE STAGE CARDS — Colored hover ─── */
 .stage-card[data-stage="captado"]:hover { background: rgba(161,161,170,0.12) !important; border-color: rgba(161,161,170,0.25) !important; }
@@ -1537,7 +1538,7 @@ td.num-right {
       </div>
       <div class="bcard cover-metric">
         <div class="cm-value num">989</div>
-        <div class="cm-label">Leads em campanha <span class="info-tip" data-tip="Total de leads impactados por campanha WhatsApp em 03/07. Mornos (461) concluída · Quentes (528) concluída. Métricas de resposta disponíveis 48h após o disparo.">&#x24D8;</span></div>
+        <div class="cm-label">Leads em campanha <span class="info-tip" data-tip="Campanhas WhatsApp em 03/07. Mornos: 461 disparados → 374 entregues → 0 respostas. Quentes: 528 disparados → 72 entregues → 2 respostas. Filtragem por cooldown_campanha reduziu alcance significativamente.">&#x24D8;</span></div>
       </div>
       <div class="bcard cover-metric">
         <div class="cm-value num"><span class="currency-symbol">R$</span> 997K</div>
@@ -2060,21 +2061,30 @@ td.num-right {
     <div class="metric-grid metric-grid--4 mt-16">
       <div class="bcard metric-card">
         <div class="metric-value num">461</div>
-        <div class="metric-label">Leads (Engajados) <span class="info-tip" data-tip="Leads com tag 'engajado' que demonstraram atenção mas ainda não clicaram link de compra.">&#x24D8;</span></div>
+        <div class="metric-label">Leads disparados <span class="info-tip" data-tip="461 leads segmentados para a campanha. Destes, 385 entraram no WF (76 filtrados por validação de WhatsApp/DND). 374 mensagens confirmadas como entregues.">&#x24D8;</span></div>
       </div>
       <div class="bcard metric-card">
-        <div class="metric-value num" style="color:rgba(255,255,255,0.35);">—</div>
-        <div class="metric-label">Responderam <span class="info-tip" data-tip="Métricas de resposta disponíveis 48h após o disparo (a partir de 05/07).">&#x24D8;</span></div>
+        <div class="metric-value num" style="color: var(--red);">0</div>
+        <div class="metric-sub" style="font-size:11px; color:rgba(255,255,255,0.45); margin-top:2px;">0% taxa de resposta</div>
+        <div class="metric-label">Responderam <span class="info-tip" data-tip="Zero respostas após 72h+. 358 leads leram a mensagem mas não interagiram. Copy do template não gerou engajamento — reavaliar para Onda 2.">&#x24D8;</span></div>
       </div>
       <div class="bcard metric-card">
-        <div class="metric-value num" style="color:rgba(255,255,255,0.35);">—</div>
-        <div class="metric-label">Taxa de entrega</div>
+        <div class="metric-value num" style="color: var(--green);">97,1%</div>
+        <div class="metric-sub" style="font-size:11px; color:rgba(255,255,255,0.45); margin-top:2px;">374 de 385 enviados</div>
+        <div class="metric-label">Taxa de entrega <span class="info-tip" data-tip="374 mensagens entregues de 385 enviadas pelo WF. 358 lidas (95,7%). Alta entrega e leitura, mas zero interação.">&#x24D8;</span></div>
       </div>
       <div class="bcard metric-card">
-        <div class="metric-value num"><span style="font-size:0.35em; font-weight:400; opacity:0.5; font-family:'Inter',sans-serif;">Aprox.</span> <span class="currency-symbol">R$</span> 138</div>
+        <div class="metric-value num"><span style="font-size:0.35em; font-weight:400; opacity:0.5; font-family:'Inter',sans-serif;">Aprox.</span> <span class="currency-symbol">R$</span> 112</div>
         <div class="metric-pct num" style="font-size:11px; color:rgba(255,255,255,0.4);">Marketing · R$ 0,30/msg</div>
-        <div class="metric-label">Custo estimado <span class="info-tip" data-tip="Mensagem tipo Marketing (R$ 0,30/msg). 461 × R$ 0,30 = Aprox. R$ 138.">&#x24D8;</span></div>
+        <div class="metric-label">Custo real <span class="info-tip" data-tip="Custo baseado em mensagens entregues: 374 × R$ 0,30 = R$ 112. Estimativa anterior (R$ 138) era baseada nos 461 disparados.">&#x24D8;</span></div>
       </div>
+    </div>
+
+    <!-- Nota sobre filtragem -->
+    <div class="bcard mt-16" style="padding: 14px 18px; border-left: 3px solid var(--amber); background: rgba(249,168,37,0.06);">
+      <p style="font-size: 13px; color: rgba(255,255,255,0.7); line-height: 1.6; margin: 0;">
+        <strong style="color: var(--amber);">Filtragem do WF:</strong> Dos 461 leads disparados, <strong>76 foram filtrados</strong> antes do envio (sem WhatsApp válido, DND ou condições do WF). 385 mensagens foram efetivamente enviadas, 374 entregues e 358 lidas. O copy do template não gerou nenhuma resposta — recomenda-se reavaliar a abordagem para a Onda 2.
+      </p>
     </div>
 
     <div class="bcard mt-16" style="padding:0;">
@@ -2085,10 +2095,11 @@ td.num-right {
             <th>Campanha</th>
             <th>Template</th>
             <th>Tipo</th>
-            <th style="text-align:right">Enviados</th>
+            <th style="text-align:right">Disparados</th>
+            <th style="text-align:right">Entregues</th>
             <th style="text-align:right">Responderam</th>
             <th style="text-align:right">Taxa de resposta</th>
-            <th style="text-align:right">Custo est.</th>
+            <th style="text-align:right">Custo real</th>
           </tr>
         </thead>
         <tbody>
@@ -2097,15 +2108,16 @@ td.num-right {
             <td><code style="font-size:12px; background:rgba(255,255,255,0.06); padding:2px 6px; border-radius:4px;">saudade_mornos_campanha2</code></td>
             <td><span class="badge" style="font-size:10px; padding:3px 8px;">Marketing</span></td>
             <td class="num-right">461</td>
-            <td class="num-right" style="color:rgba(255,255,255,0.35)">pendente</td>
-            <td class="num-right" style="color:rgba(255,255,255,0.35)">pendente</td>
-            <td class="num-right">R$ 138</td>
+            <td class="num-right">374</td>
+            <td class="num-right" style="color: var(--red);">0</td>
+            <td class="num-right" style="color: var(--red);">0%</td>
+            <td class="num-right">R$ 112</td>
           </tr>
         </tbody>
       </table>
       </div>
     </div>
-    <p class="note">Disparado em 03/07 10:00 AM · 461 enviados · 100% sucesso · Ritmo: 50/5min (~45min total)<br>Métricas de resposta atualizadas 48h após o disparo (disponíveis a partir de 05/07).</p>
+    <p class="note">Disparado em 03/07 10:00 AM · 461 na lista → 385 enviados pelo WF → 374 entregues → 358 lidos → 0 responderam<br>76 leads filtrados (sem WhatsApp válido ou DND). Taxa de leitura: 95,7%.</p>
 
     <div class="divider"></div>
 
@@ -2115,21 +2127,30 @@ td.num-right {
     <div class="metric-grid metric-grid--4 mt-16">
       <div class="bcard metric-card">
         <div class="metric-value num">528</div>
-        <div class="metric-label">Leads (Interessados) <span class="info-tip" data-tip="Leads que clicaram link de compra — demonstraram intenção de compra.">&#x24D8;</span></div>
+        <div class="metric-label">Leads disparados <span class="info-tip" data-tip="528 leads segmentados para a campanha. Apenas 75 mensagens enviadas pelo WF — 451 filtrados pela tag cooldown_campanha (aplicada em campanhas anteriores). 133 ainda presos no pipeline.">&#x24D8;</span></div>
       </div>
       <div class="bcard metric-card">
-        <div class="metric-value num" style="color:rgba(255,255,255,0.35);">—</div>
-        <div class="metric-label">Responderam <span class="info-tip" data-tip="Métricas de resposta disponíveis 48h após o disparo (a partir de 05/07).">&#x24D8;</span></div>
+        <div class="metric-value num" style="color: var(--amber);">2</div>
+        <div class="metric-sub" style="font-size:11px; color:rgba(255,255,255,0.45); margin-top:2px;">2,7% taxa de resposta</div>
+        <div class="metric-label">Responderam <span class="info-tip" data-tip="2 leads responderam à mensagem WhatsApp dentre os 75 que efetivamente receberam. Taxa baixa, mas acima dos Mornos (0%).">&#x24D8;</span></div>
       </div>
       <div class="bcard metric-card">
-        <div class="metric-value num" style="color:rgba(255,255,255,0.35);">—</div>
-        <div class="metric-label">Taxa de entrega</div>
+        <div class="metric-value num" style="color: var(--green);">96%</div>
+        <div class="metric-sub" style="font-size:11px; color:rgba(255,255,255,0.45); margin-top:2px;">72 de 75 enviados</div>
+        <div class="metric-label">Taxa de entrega <span class="info-tip" data-tip="72 mensagens entregues de 75 enviadas. 24 confirmadas como lidas (33,3%). Taxa de entrega alta, leitura mais baixa que Mornos.">&#x24D8;</span></div>
       </div>
       <div class="bcard metric-card">
-        <div class="metric-value num"><span style="font-size:0.35em; font-weight:400; opacity:0.5; font-family:'Inter',sans-serif;">Aprox.</span> <span class="currency-symbol">R$</span> 158</div>
+        <div class="metric-value num"><span style="font-size:0.35em; font-weight:400; opacity:0.5; font-family:'Inter',sans-serif;">Aprox.</span> <span class="currency-symbol">R$</span> 22</div>
         <div class="metric-pct num" style="font-size:11px; color:rgba(255,255,255,0.4);">Marketing · R$ 0,30/msg</div>
-        <div class="metric-label">Custo estimado <span class="info-tip" data-tip="Mensagem tipo Marketing (R$ 0,30/msg). 528 × R$ 0,30 = Aprox. R$ 158.">&#x24D8;</span></div>
+        <div class="metric-label">Custo real <span class="info-tip" data-tip="Custo baseado em mensagens entregues: 72 × R$ 0,30 = R$ 21,60. Estimativa anterior (R$ 158) era baseada nos 528 disparados — a maioria foi filtrada pelo cooldown.">&#x24D8;</span></div>
       </div>
+    </div>
+
+    <!-- Nota sobre filtragem -->
+    <div class="bcard mt-16" style="padding: 14px 18px; border-left: 3px solid var(--red); background: rgba(229,57,53,0.06);">
+      <p style="font-size: 13px; color: rgba(255,255,255,0.7); line-height: 1.6; margin: 0;">
+        <strong style="color: var(--red);">Filtragem crítica:</strong> Dos 528 leads disparados, <strong>451 foram filtrados</strong> pela tag <code style="font-size:11px; background:rgba(255,255,255,0.08); padding:1px 5px; border-radius:3px;">cooldown_campanha</code> (aplicada nas campanhas Frios A–E anteriores). Apenas 75 mensagens foram enviadas, 72 entregues e 24 lidas. <strong>133 contatos ainda com tag de disparo</strong> — precisam de limpeza manual. A lógica de cooldown precisa ser revista para a Onda 2.
+      </p>
     </div>
 
     <div class="bcard mt-16" style="padding:0;">
@@ -2140,10 +2161,11 @@ td.num-right {
             <th>Campanha</th>
             <th>Template</th>
             <th>Tipo</th>
-            <th style="text-align:right">Enviados</th>
+            <th style="text-align:right">Disparados</th>
+            <th style="text-align:right">Entregues</th>
             <th style="text-align:right">Responderam</th>
             <th style="text-align:right">Taxa de resposta</th>
-            <th style="text-align:right">Custo est.</th>
+            <th style="text-align:right">Custo real</th>
           </tr>
         </thead>
         <tbody>
@@ -2152,15 +2174,16 @@ td.num-right {
             <td><code style="font-size:12px; background:rgba(255,255,255,0.06); padding:2px 6px; border-radius:4px;">saudade_quente_lineup_220626</code></td>
             <td><span class="badge" style="font-size:10px; padding:3px 8px;">Marketing</span></td>
             <td class="num-right">528</td>
-            <td class="num-right" style="color:rgba(255,255,255,0.35)">pendente</td>
-            <td class="num-right" style="color:rgba(255,255,255,0.35)">pendente</td>
-            <td class="num-right">R$ 158</td>
+            <td class="num-right">72</td>
+            <td class="num-right" style="color: var(--amber);">2</td>
+            <td class="num-right" style="color: var(--amber);">2,7%</td>
+            <td class="num-right">R$ 22</td>
           </tr>
         </tbody>
       </table>
       </div>
     </div>
-    <p class="note">Disparado em 03/07 02:50 PM · 528 enviados · 100% sucesso · Ritmo: 50/5min (~55min total)<br>Métricas de resposta atualizadas 48h após o disparo (disponíveis a partir de 05/07).</p>
+    <p class="note">Disparado em 03/07 02:50 PM · 528 na lista → 75 enviados pelo WF → 72 entregues → 24 lidos → 2 responderam<br>451 leads filtrados por cooldown_campanha. 133 ainda com tag disparo_quentes_1 (pendente limpeza).</p>
 
     <div class="divider"></div>
 
@@ -2294,17 +2317,17 @@ td.num-right {
             <td>WhatsApp</td>
             <td>Mornos #1</td>
             <td><span class="badge" style="font-size:10px; padding:3px 8px;">Marketing</span></td>
-            <td class="num-right">461</td>
-            <td class="num-right">pendente</td>
-            <td class="num-right">Aprox. R$ 138</td>
+            <td class="num-right">374 <span style="font-size:10px; color:rgba(255,255,255,0.35);">(461 disp.)</span></td>
+            <td class="num-right" style="color: var(--red);">0%</td>
+            <td class="num-right">R$ 112</td>
           </tr>
           <tr>
             <td>WhatsApp</td>
             <td>Quentes #1</td>
             <td><span class="badge" style="font-size:10px; padding:3px 8px;">Marketing</span></td>
-            <td class="num-right">528</td>
-            <td class="num-right">pendente</td>
-            <td class="num-right">Aprox. R$ 158</td>
+            <td class="num-right">72 <span style="font-size:10px; color:rgba(255,255,255,0.35);">(528 disp.)</span></td>
+            <td class="num-right" style="color: var(--amber);">2,7%</td>
+            <td class="num-right">R$ 22</td>
           </tr>
           <tr>
             <td>Email</td>
@@ -2326,9 +2349,9 @@ td.num-right {
         <tfoot>
           <tr>
             <td colspan="3" style="font-weight: 600; color: rgba(255,255,255,0.6);">Total</td>
-            <td class="num-right" style="font-weight: 600;">10.055+ impressões</td>
+            <td class="num-right" style="font-weight: 600;">9.375+ impressões</td>
             <td class="num-right" style="font-weight: 600;"></td>
-            <td class="num-right" style="font-weight: 600;">Aprox. R$ 1.110</td>
+            <td class="num-right" style="font-weight: 600;">Aprox. R$ 948</td>
           </tr>
         </tfoot>
       </table>
@@ -2555,6 +2578,18 @@ td.num-right {
       <div class="bcard insight-card insight-amber">
         <p><strong>Tracking de clique WhatsApp depende de Trigger Links</strong> — não existe "Wait for WA Link Clicked" nativo. Implementar na Onda 2 com templates novos.</p>
       </div>
+      <div class="bcard insight-card insight-red">
+        <p><strong>Mornos #1: 0 respostas em 358 leituras.</strong> Template saudade_mornos_campanha2 foi lido mas não gerou engajamento. Copy precisa ser reformulado para Onda 2.</p>
+      </div>
+      <div class="bcard insight-card insight-red">
+        <p><strong>cooldown_campanha bloqueou 85% dos Quentes.</strong> 451 de 528 leads filtrados. Tag genérica de cooldown aplicada nas campanhas Frios impediu o alcance. Lógica precisa ser revista (cooldown por campanha específica).</p>
+      </div>
+      <div class="bcard insight-card insight-red">
+        <p><strong>Tags grupo_a/b/c/d/e aplicadas incorretamente.</strong> ~2.100 contatos receberam TODAS as 5 tags de grupo simultaneamente em vez de serem segmentados. Requer limpeza.</p>
+      </div>
+      <div class="bcard insight-card insight-amber">
+        <p><strong>133 contatos presos com disparo_quentes_1.</strong> Ficaram travados no pipeline 72h+ — precisam de limpeza manual da tag.</p>
+      </div>
     </div>
 
     <div class="divider"></div>
@@ -2569,7 +2604,10 @@ td.num-right {
           <li><span class="check check--done">&#x2714;</span>Disparar Mornos (461 leads) — 03/07 ✅ 100% sucesso</li>
           <li><span class="check check--done">&#x2714;</span>Disparar Quentes (528 leads) — 03/07</li>
           <li><span class="check check--done">&#x2714;</span>Tracking email: Waits abertura + micro-WFs clique (cadastro + carrinho)</li>
-          <li><span class="check"></span>Monitorar respostas Mornos/Quentes (48h tracking)</li>
+          <li><span class="check check--done">&#x2714;</span>Monitorar respostas Mornos/Quentes — Mornos: 0 respostas · Quentes: 2 respostas</li>
+          <li><span class="check"></span>Limpar tags grupo_a/b/c/d/e (~2.100 contatos)</li>
+          <li><span class="check"></span>Limpar 133 contatos presos (disparo_quentes_1)</li>
+          <li><span class="check"></span>Revisar lógica cooldown_campanha (4.361 bloqueados)</li>
           <li><span class="check"></span>Relatório pós-campanha</li>
         </ul>
       </div>
@@ -2610,12 +2648,28 @@ td.num-right {
         </thead>
         <tbody>
           <tr>
-            <td>Template saudade_quentes_campanha2</td>
+            <td>Limpar tags grupo_a/b/c/d/e (~2.100 contatos com TODAS as 5 tags)</td>
+            <td><span class="prio-alta">Alta</span></td>
+          </tr>
+          <tr>
+            <td>Limpar 133 contatos presos com disparo_quentes_1</td>
+            <td><span class="prio-alta">Alta</span></td>
+          </tr>
+          <tr>
+            <td>Revisar lógica cooldown_campanha (4.361 bloqueados = ~48% da base)</td>
+            <td><span class="prio-alta">Alta</span></td>
+          </tr>
+          <tr>
+            <td>Reformular copy templates Onda 2 (Mornos teve 0% resposta)</td>
             <td><span class="prio-alta">Alta</span></td>
           </tr>
           <tr>
             <td>WFs Onda 2</td>
             <td><span class="prio-alta">Alta (~10/07)</span></td>
+          </tr>
+          <tr>
+            <td>Template saudade_quentes_campanha2</td>
+            <td><span class="prio-alta">Alta</span></td>
           </tr>
           <tr>
             <td>Publicar Contador Inatividade</td>
@@ -2644,7 +2698,7 @@ td.num-right {
 
 <!-- ════════════════════════ FOOTER ════════════════════════ -->
 <footer class="page-footer">
-  Última atualização: 03 de julho de 2026 &middot; Confidencial — Grupo Today × Desenrola Aí
+  Última atualização: 06 de julho de 2026 &middot; Confidencial — Grupo Today × Desenrola Aí
 </footer>
 
 <!-- ════════════════════════ JS ════════════════════════ -->
@@ -2731,8 +2785,13 @@ td.num-right {
     },
     {
       date: '03/07',
-      title: 'Disparos agendados',
-      body: '461 Mornos (10h) + 528 Quentes (14h). Total: 989 leads impactados.'
+      title: 'Disparos Mornos + Quentes',
+      body: '461 Mornos (10h) + 528 Quentes (14h). Total: 989 disparados, 446 entregues (filtragem por cooldown).'
+    },
+    {
+      date: '06/07',
+      title: 'Resultados campanhas + diagnóstico',
+      body: 'Mornos: 374 entregues, 0 respostas. Quentes: 72 entregues, 2 respostas. Identificado: cooldown bloqueou 85% dos Quentes + tags grupo aplicadas errado em ~2.100 contatos.'
     }
   ];
 
