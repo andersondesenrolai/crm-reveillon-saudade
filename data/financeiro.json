@@ -1,6 +1,6 @@
 {
   "schemaVersion": 1,
-  "generatedAt": "2026-07-21T17:30:00-03:00",
+  "generatedAt": "2026-07-21T19:52:29-03:00",
   "exchange": {
     "usdToBrl": 5.1176,
     "date": "2026-07-17",
@@ -110,17 +110,17 @@
     }
   ],
   "operationalSnapshot": {
-    "capturedAt": "2026-07-21T17:30:00-03:00",
-    "contacts": 10415,
+    "capturedAt": "2026-07-21T19:52:29-03:00",
+    "contacts": 10427,
     "workflows": {
       "total": 46,
-      "published": 36,
-      "draft": 10
+      "published": 37,
+      "draft": 9
     },
     "pipeline": {
       "captado": 7812,
-      "engajado": 1423,
-      "interessado": 904,
+      "engajado": 1431,
+      "interessado": 908,
       "negociacao": 39,
       "comprou": 223
     },

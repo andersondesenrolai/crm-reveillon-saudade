@@ -1469,6 +1469,45 @@ td.num-right {
 .finance-audit-note { margin-top:5px; color:rgba(255,255,255,.45); font-size:10px; line-height:1.45; }
 .finance-empty { color:rgba(255,255,255,.55); padding:20px; text-align:center; }
 
+/* ─── COMPACT HISTORY / DISCLOSURES ─── */
+.cover-brand-kicker { color:var(--roxo); font:700 12px 'Space Grotesk',sans-serif; letter-spacing:.16em; text-transform:uppercase; }
+.cover-links { display:flex; align-items:center; justify-content:center; gap:10px; flex-wrap:wrap; margin-top:22px; }
+.cover-link { border:1px solid rgba(123,104,238,.28); background:rgba(123,104,238,.08); color:rgba(255,255,255,.72); border-radius:999px; padding:9px 14px; font:600 11px 'Inter',sans-serif; cursor:pointer; transition:background .2s ease,border-color .2s ease,color .2s ease; }
+.cover-link:hover { background:rgba(123,104,238,.16); border-color:rgba(123,104,238,.5); color:var(--white); }
+.cover-link:focus-visible,.section-disclosure>summary:focus-visible { outline:2px solid var(--roxo); outline-offset:3px; }
+.source-stamp { display:inline-flex; align-items:center; gap:7px; margin-top:12px; color:rgba(255,255,255,.48); font-size:11px; }
+.source-stamp::before { content:''; width:7px; height:7px; border-radius:50%; background:var(--green); box-shadow:0 0 0 4px rgba(67,160,71,.1); }
+.disclosure-stack { display:grid; gap:12px; margin-top:20px; }
+.section-disclosure { border:1px solid var(--card-border); border-radius:var(--radius); background:var(--card-bg); overflow:hidden; }
+.section-disclosure>summary { display:grid; grid-template-columns:1fr auto; align-items:center; gap:16px; padding:20px 22px; cursor:pointer; list-style:none; transition:background .2s ease; }
+.section-disclosure>summary::-webkit-details-marker { display:none; }
+.section-disclosure>summary:hover { background:rgba(123,104,238,.06); }
+.section-disclosure>summary::after { content:'+'; width:28px; height:28px; display:grid; place-items:center; border-radius:50%; border:1px solid rgba(123,104,238,.3); color:var(--roxo); font:600 18px 'Space Grotesk',sans-serif; }
+.section-disclosure[open]>summary::after { content:'−'; }
+.disclosure-title { display:flex; align-items:center; gap:9px; flex-wrap:wrap; font:700 16px 'Epilogue',sans-serif; }
+.disclosure-meta { margin-top:6px; color:rgba(255,255,255,.5); font-size:12px; line-height:1.45; }
+.disclosure-body { padding:0 22px 24px; border-top:1px solid rgba(255,255,255,.05); }
+.proposal-card { border:1px dashed rgba(123,104,238,.45); background:linear-gradient(135deg,rgba(123,104,238,.1),rgba(123,104,238,.03)); }
+.proposal-card .proposal-label { color:var(--roxo); font-size:10px; font-weight:700; letter-spacing:.12em; text-transform:uppercase; }
+.proposal-card h3 { margin-top:9px; font-size:20px; }
+.proposal-card p { margin-top:9px; color:rgba(255,255,255,.62); font-size:13px; line-height:1.6; }
+.roi-ledger { display:grid; grid-template-columns:1.15fr .85fr; gap:16px; margin-top:20px; }
+.fee-list { display:grid; gap:0; margin-top:12px; }
+.fee-row { display:grid; grid-template-columns:90px 1fr auto; gap:12px; align-items:center; padding:13px 0; border-bottom:1px solid rgba(255,255,255,.06); font-size:12px; }
+.fee-row:last-child { border-bottom:none; }
+.fee-status { color:rgba(255,255,255,.5); }
+.fee-status--paid { color:var(--green); }
+
+@media (max-width:768px) {
+  .roi-ledger { grid-template-columns:1fr; }
+  .section-disclosure>summary { padding:16px; }
+  .disclosure-body { padding:0 16px 18px; }
+  .fee-row { grid-template-columns:72px 1fr auto; gap:8px; }
+}
+@media (prefers-reduced-motion:reduce) {
+  .cover-link,.section-disclosure>summary { transition:none; }
+}
+
 @media (max-width:1100px) {
   .finance-kpi-grid, .finance-audit-grid { grid-template-columns:repeat(2,1fr); }
 }
@@ -1530,7 +1569,6 @@ td.num-right {
   </div>
   <div class="navbar-tabs">
     <button class="tab-btn active" data-tab="capa">Capa</button>
-    <button class="tab-btn" data-tab="setup">Setup</button>
     <button class="tab-btn" data-tab="pipeline">Pipeline</button>
     <button class="tab-btn" data-tab="campanhas">Campanhas</button>
     <button class="tab-btn" data-tab="carrinho">Recuperação</button>
@@ -1544,7 +1582,6 @@ td.num-right {
 </nav>
 <div class="mobile-menu" id="mobileMenu">
   <button class="mm-btn active" data-tab="capa">Capa</button>
-  <button class="mm-btn" data-tab="setup">Setup</button>
   <button class="mm-btn" data-tab="pipeline">Pipeline</button>
   <button class="mm-btn" data-tab="campanhas">Campanhas</button>
   <button class="mm-btn" data-tab="carrinho">Recuperação</button>
@@ -1566,37 +1603,36 @@ td.num-right {
 <!-- ════════════════════════ TAB 1: CAPA ════════════════════════ -->
 <section id="capa" class="tab-content active">
   <div class="cover">
-    <div class="cover-logos">
-      <img src="logo-desenrolai-branco.svg" alt="Desenrola Aí" class="cover-logo">
-      <span class="cover-logos-sep">&times;</span>
-      <img src="logo-today-branco.png" alt="Agência Today" class="cover-logo cover-logo-today">
-    </div>
+    <div class="cover-brand-kicker">Painel CRM & Receita</div>
     <div class="cover-badge">
-      <span class="badge">Relatório #1 — Setup + Operação</span>
+      <span class="badge">Operação contínua · 2026–2027</span>
     </div>
-    <h1 class="cover-title">CRM Intelligence Report<br><span>Réveillon Saudade 2027</span></h1>
-    <p class="cover-subtitle">Do zero ao CRM operacional em 15 dias. Setup completo, campanhas ativas e primeiros resultados.</p>
+    <h1 class="cover-title"><span>Réveillon Saudade 2027</span><br>Dashboard de Performance</h1>
+    <p class="cover-subtitle">Visão atual do funil, campanhas, recuperação de receita e investimento da operação de CRM.</p>
 
     <div class="cover-metrics">
       <div class="bcard cover-metric">
-        <div class="cm-value num">10.401</div>
-        <div class="cm-label">Oportunidades <span class="info-tip" data-tip="Snapshot da API em 21/07: soma dos cinco estágios principais do pipeline Réveillon Saudade 2027.">&#x24D8;</span></div>
+        <div class="cm-value num">10.413</div>
+        <div class="cm-label">Oportunidades <span class="info-tip" data-tip="Snapshot da API em 21/07 às 19:52: soma dos cinco estágios principais do pipeline Réveillon Saudade 2027.">&#x24D8;</span></div>
       </div>
       <div class="bcard cover-metric">
         <div class="cm-value num">223</div>
         <div class="cm-label">Compradores <span class="info-tip" data-tip="Leads que efetivaram a compra de ingresso, confirmados via planilha MeuBilhete.">&#x24D8;</span></div>
       </div>
       <div class="bcard cover-metric">
-        <div class="cm-value num">989</div>
-        <div class="cm-label">Elegíveis em campanha <span class="info-tip" data-tip="Campanhas WhatsApp de 03/07: 989 elegíveis, 461 mensagens processadas, 429 entregues ou lidas e 134 leituras confirmadas no snapshot de 21/07.">&#x24D8;</span></div>
+        <div class="cm-value num">10.427</div>
+        <div class="cm-label">Contatos no CRM <span class="info-tip" data-tip="Total de contatos retornado pela API da subconta em 21/07 às 19:52.">&#x24D8;</span></div>
       </div>
       <div class="bcard cover-metric">
         <div class="cm-value num"><span class="currency-symbol">R$</span> 997K</div>
-        <div class="cm-label">Em pipeline <span class="info-tip" data-tip="Soma do valor de todas as oportunidades no estágio Comprou.">&#x24D8;</span></div>
+        <div class="cm-label">Receita em Comprou <span class="info-tip" data-tip="R$ 997.246 somados nas 223 oportunidades do estágio Comprou, via API em 21/07 às 19:52.">&#x24D8;</span></div>
       </div>
     </div>
-    <p class="cover-period">18 jun — 21 jul 2026</p>
-    <div class="cover-footer">Confidencial — Grupo Today × Desenrola Aí — Julho 2026</div>
+    <div class="source-stamp">Dados operacionais atualizados em 21/07/2026 às 19:52</div>
+    <div class="cover-links">
+      <button class="cover-link internal-tab-link" data-tab="setup">Ver histórico de setup</button>
+    </div>
+    <div class="cover-footer">Operação Desenrola Aí para Grupo Today · Confidencial</div>
   </div>
 </section>
 
@@ -1806,12 +1842,12 @@ td.num-right {
         <div class="metric-label">Lead Captado <span class="info-tip" data-tip="Leads que entraram no CRM via formulário de cadastro mas ainda não interagiram.">&#x24D8;</span></div>
       </div>
       <div class="bcard stage-card metric-card" data-stage="engajado">
-        <div class="metric-value num">1.423</div>
+        <div class="metric-value num">1.431</div>
         <div class="metric-pct num">13,7%</div>
         <div class="metric-label">Engajado <span class="info-tip" data-tip="Leads que abriram email ou responderam WhatsApp — demonstraram atenção.">&#x24D8;</span></div>
       </div>
       <div class="bcard stage-card metric-card" data-stage="interessado">
-        <div class="metric-value num">904</div>
+        <div class="metric-value num">908</div>
         <div class="metric-pct num">8,7%</div>
         <div class="metric-label">Interessado <span class="info-tip" data-tip="Leads que clicaram em link de compra — demonstraram intenção.">&#x24D8;</span></div>
       </div>
@@ -1838,13 +1874,13 @@ td.num-right {
       <div class="funnel-arrow"></div>
       <div class="funnel-stage" style="width:72%; background: linear-gradient(90deg, rgba(67,160,71,0.18), rgba(67,160,71,0.08)); border: 1px solid rgba(67,160,71,0.3);">
         <span class="fs-name">Engajado</span>
-        <span class="fs-count num">1.423</span>
+        <span class="fs-count num">1.431</span>
         <span class="fs-pct num">13,7%</span>
       </div>
       <div class="funnel-arrow"></div>
       <div class="funnel-stage" style="width:54%; background: linear-gradient(90deg, rgba(66,165,245,0.18), rgba(66,165,245,0.08)); border: 1px solid rgba(66,165,245,0.3);">
         <span class="fs-name">Interessado</span>
-        <span class="fs-count num">904</span>
+        <span class="fs-count num">908</span>
         <span class="fs-pct num">8,7%</span>
       </div>
       <div class="funnel-arrow"></div>
@@ -1865,12 +1901,12 @@ td.num-right {
     <h3 class="subsection-title mt-48">Movimentação entre Estágios</h3>
     <div class="grid-3 mt-16">
       <div class="bcard movement-card">
-        <div class="mc-title">Lead Captado &rarr; Engajado (<span class="num">1.423</span>)</div>
+        <div class="mc-title">Lead Captado &rarr; Engajado (<span class="num">1.431</span>)</div>
         <div class="mc-item">Participação no pipeline <span class="num">13,7%</span></div>
         <div class="mc-item">Critério <span class="num">abriu email ou respondeu WA</span></div>
       </div>
       <div class="bcard movement-card">
-        <div class="mc-title">Engajado &rarr; Interessado (<span class="num">904</span>)</div>
+        <div class="mc-title">Engajado &rarr; Interessado (<span class="num">908</span>)</div>
         <div class="mc-item">Participação no pipeline <span class="num">8,7%</span></div>
         <div class="mc-item">Critério <span class="num">clique ou intenção</span></div>
       </div>
@@ -1885,58 +1921,43 @@ td.num-right {
 
     <!-- Revenue -->
     <h3 class="subsection-title mt-48">Receita</h3>
-    <div class="revenue-grid">
+    <div class="revenue-grid" style="grid-template-columns:repeat(2,1fr);">
       <div class="bcard revenue-card" style="background: var(--gradient-dark); border-color: rgba(123,104,238,0.2);">
-        <div class="rv-value num" style="color: var(--green);"><span class="currency-symbol">R$</span> 997K</div>
-        <div class="rv-label">Comprou</div>
+        <div class="rv-value num" style="color: var(--green);"><span class="currency-symbol">R$</span> 997.246</div>
+        <div class="rv-label">223 oportunidades em Comprou</div>
       </div>
       <div class="bcard revenue-card">
-        <div class="rv-value num" style="color: var(--amber);"><span class="currency-symbol">R$</span> 248K</div>
-        <div class="rv-label">Em Negociação (carrinhos)</div>
-      </div>
-      <div class="bcard revenue-card">
-        <div class="rv-value num" style="color: var(--roxo);"><span class="currency-symbol">R$</span> 29,4M</div>
-        <div class="rv-label">Pipeline total</div>
+        <div class="rv-value num" style="color: var(--amber);"><span class="currency-symbol">R$</span> 209.939</div>
+        <div class="rv-label">39 oportunidades em Negociação</div>
       </div>
     </div>
+    <div class="source-stamp">Valores das oportunidades consultados pela API em 21/07/2026 às 19:52</div>
 
     <!-- Receita recuperada vs Fee -->
-    <h3 class="subsection-title mt-48">Receita Recuperada vs Fee</h3>
-
-    <div class="roi-grid" style="grid-template-columns: 1fr 1fr;">
-      <!-- Fee proporcional -->
-      <div class="bcard roi-card">
-        <div class="roi-label" style="margin-bottom: 12px; font-size: 12px; text-transform: uppercase; letter-spacing: 0.06em;">Fee pro rata (15 dias)</div>
-        <div class="roi-value num" style="color: rgba(255,255,255,0.7);"><span class="currency-symbol">R$</span> 1.666</div>
-        <div style="margin-top: 16px; padding-top: 16px; border-top: 1px solid rgba(255,255,255,0.06);">
-          <div style="display: flex; justify-content: space-between; align-items: center;">
-            <span style="font-size: 12px; color: rgba(255,255,255,0.45);">Receita recuperada</span>
-            <span class="num" style="font-size: 14px; font-weight: 600; color: var(--green);">R$ 18.230</span>
-          </div>
-          <div style="display: flex; justify-content: space-between; align-items: center; margin-top: 8px;">
-            <span style="font-size: 12px; color: rgba(255,255,255,0.45);">Retorno</span>
-            <span class="num" style="font-size: 14px; font-weight: 700; color: var(--roxo);">10,9x</span>
-          </div>
+    <h3 class="subsection-title mt-48">Receita Recuperada × Fee Acumulado</h3>
+    <p class="text-sm text-muted mb-16">A leitura passa a acumular tudo o que foi pago e toda receita recuperada confirmada desde o início da gestão.</p>
+    <div class="roi-ledger">
+      <div class="bcard roi-card" style="text-align:left;">
+        <div class="finance-kpi-label">Posição atual · 21/07</div>
+        <div class="roi-value num" style="color:var(--green); margin-top:12px;"><span class="currency-symbol">R$</span> 18.230</div>
+        <div class="roi-label">Receita recuperada acumulada</div>
+        <div class="finance-comparison mt-16">
+          <div class="finance-comparison-row"><span class="finance-comparison-label">Fee pago acumulado</span><span class="finance-comparison-value">R$ 1.666</span></div>
+          <div class="finance-comparison-row"><span class="finance-comparison-label">ROI sobre fee pago</span><span class="finance-comparison-value" style="color:var(--roxo);">10,9x</span></div>
         </div>
       </div>
-
-      <!-- Fee mensal cheio -->
-      <div class="bcard roi-card">
-        <div class="roi-label" style="margin-bottom: 12px; font-size: 12px; text-transform: uppercase; letter-spacing: 0.06em;">Fee mensal completo</div>
-        <div class="roi-value num" style="color: rgba(255,255,255,0.7);"><span class="currency-symbol">R$</span> 2.500</div>
-        <div style="margin-top: 16px; padding-top: 16px; border-top: 1px solid rgba(255,255,255,0.06);">
-          <div style="display: flex; justify-content: space-between; align-items: center;">
-            <span style="font-size: 12px; color: rgba(255,255,255,0.45);">Receita recuperada</span>
-            <span class="num" style="font-size: 14px; font-weight: 600; color: var(--green);">R$ 18.230</span>
-          </div>
-          <div style="display: flex; justify-content: space-between; align-items: center; margin-top: 8px;">
-            <span style="font-size: 12px; color: rgba(255,255,255,0.45);">Retorno</span>
-            <span class="num" style="font-size: 14px; font-weight: 700; color: var(--roxo);">7,3x</span>
-          </div>
+      <div class="bcard">
+        <div class="finance-kpi-label">Histórico de fee</div>
+        <div class="fee-list">
+          <div class="fee-row"><span>15/06</span><span class="fee-status fee-status--paid">Pago · pro rata</span><strong>R$ 1.666</strong></div>
+          <div class="fee-row"><span>30/07</span><span class="fee-status">Programado · mensal</span><strong>R$ 2.500</strong></div>
+        </div>
+        <div class="callout callout--roxo mt-16" style="margin-bottom:0;">
+          Após o pagamento de 30/07, o fee acumulado será <strong>R$ 4.166</strong>. Mantida a receita recuperada atual, o ROI acumulado será <strong>4,4x</strong>.
         </div>
       </div>
     </div>
-    <p class="note mt-16">Receita recuperada via régua de carrinho abandonado. Não inclui custos de disparo WhatsApp (plataforma).</p>
+    <p class="note mt-16">Receita recuperada confirmada no primeiro ciclo da régua de carrinho. Novas conversões entram de forma acumulativa; custos de mídia e plataforma permanecem separados na aba Financeiro.</p>
   </div>
 </section>
 
@@ -1944,10 +1965,24 @@ td.num-right {
 <section id="campanhas" class="tab-content">
   <div class="section-inner">
     <h2 class="section-title">Campanhas</h2>
-    <p class="section-subtitle">Performance dos disparos de WhatsApp e status das campanhas agendadas.</p>
+    <p class="section-subtitle">Resumo executivo do que já foi realizado, com o relatório completo disponível sob demanda.</p>
+    <div class="source-stamp">Campanhas realizadas entre 25/06 e 03/07 · status de entrega revisado em 21/07</div>
+
+    <div class="metric-grid metric-grid--4 mt-24">
+      <div class="bcard metric-card"><div class="metric-value num">9.527+</div><div class="metric-label">Comunicações registradas</div></div>
+      <div class="bcard metric-card"><div class="metric-value metric-value--roxo num">744</div><div class="metric-label">Respostas nas campanhas Frios</div></div>
+      <div class="bcard metric-card"><div class="metric-value metric-value--green num">R$ 18.230</div><div class="metric-label">Receita recuperada no ciclo inicial</div></div>
+      <div class="bcard metric-card"><div class="metric-value num">10,9x</div><div class="metric-label">ROI atual sobre fee pago</div></div>
+    </div>
+
+    <h3 class="subsection-title mt-48">Campanhas realizadas</h3>
+    <p class="text-sm text-muted mb-16">Clique em uma campanha para consultar segmentação, entrega, resposta, custo e diagnóstico.</p>
+    <div class="disclosure-stack">
 
     <!-- WA Frios -->
-    <h3 class="subsection-title mt-32">WhatsApp — Frios <span class="badge badge--green" style="margin-left: 8px; font-size: 11px;">Concluída</span></h3>
+    <details class="section-disclosure">
+      <summary><div><div class="disclosure-title">WhatsApp — Frios <span class="badge badge--green">Concluída</span></div><div class="disclosure-meta">8.017 envios · 744 respostas · 9,3% de resposta · cinco grupos</div></div></summary>
+      <div class="disclosure-body">
 
     <div class="metric-grid metric-grid--4 mt-16">
       <div class="bcard metric-card">
@@ -2075,11 +2110,13 @@ td.num-right {
         </div>
       </div>
     </div>
-
-    <div class="divider"></div>
+      </div>
+    </details>
 
     <!-- WA Carrinho (Marketing) -->
-    <h3 class="subsection-title">WhatsApp — Carrinho Abandonado <span class="badge badge--green" style="margin-left: 8px; font-size: 11px;">Ativa</span></h3>
+    <details class="section-disclosure">
+      <summary><div><div class="disclosure-title">WhatsApp — Carrinho Abandonado <span class="badge badge--neutral">Ciclo encerrado</span></div><div class="disclosure-meta">40 mensagens · 4 conversões · R$ 18.230 recuperados</div></div></summary>
+      <div class="disclosure-body">
     <p class="text-sm text-muted mb-16">Mensagens automáticas da régua de recuperação de carrinho. Tipo Marketing (R$ 0,30/msg).</p>
 
     <div class="metric-grid metric-grid--4 mt-16">
@@ -2102,11 +2139,13 @@ td.num-right {
         <div class="metric-label">Custo estimado <span class="info-tip" data-tip="Custo estimado com base no preço de mensagem Marketing da Meta (R$ 0,30/msg).">&#x24D8;</span></div>
       </div>
     </div>
-
-    <div class="divider"></div>
+      </div>
+    </details>
 
     <!-- WA Mornos -->
-    <h3 class="subsection-title">WhatsApp — Mornos <span class="badge badge--green" style="margin-left: 8px; font-size: 11px;">Concluída</span></h3>
+    <details class="section-disclosure">
+      <summary><div><div class="disclosure-title">WhatsApp — Mornos #1 <span class="badge badge--green">Concluída</span></div><div class="disclosure-meta">461 elegíveis · 385 processadas · 111 leituras confirmadas · 0 respostas</div></div></summary>
+      <div class="disclosure-body">
 
     <div class="metric-grid metric-grid--4 mt-16">
       <div class="bcard metric-card">
@@ -2172,11 +2211,13 @@ td.num-right {
       </div>
     </div>
     <p class="note">Snapshot em 21/07 · 461 elegíveis → 385 processadas → 358 entregues ou lidas → 111 leituras confirmadas → 0 respostas. Taxa de sucesso de entrega: 93,0%; leitura sobre entregues/lidas: 31,0%.</p>
-
-    <div class="divider"></div>
+      </div>
+    </details>
 
     <!-- WA Quentes -->
-    <h3 class="subsection-title">WhatsApp — Quentes <span class="badge badge--green" style="margin-left: 8px; font-size: 11px;">Concluída</span></h3>
+    <details class="section-disclosure">
+      <summary><div><div class="disclosure-title">WhatsApp — Quentes #1 <span class="badge badge--green">Concluída</span></div><div class="disclosure-meta">528 elegíveis · 76 processadas · 23 leituras confirmadas · 2 respostas</div></div></summary>
+      <div class="disclosure-body">
 
     <div class="metric-grid metric-grid--4 mt-16">
       <div class="bcard metric-card">
@@ -2242,11 +2283,13 @@ td.num-right {
       </div>
     </div>
     <p class="note">Snapshot em 21/07 · 528 elegíveis → 76 processadas → 71 entregues ou lidas → 23 leituras confirmadas → 2 respostas. Taxa de sucesso de entrega: 93,4%; resposta sobre processadas: 2,6%.</p>
-
-    <div class="divider"></div>
+      </div>
+    </details>
 
     <!-- Email -->
-    <h3 class="subsection-title">Email — Confirmação de Cadastro <span class="badge badge--green" style="margin-left: 8px; font-size: 11px;">Ativa</span></h3>
+    <details class="section-disclosure">
+      <summary><div><div class="disclosure-title">Email — Confirmação de Cadastro <span class="badge badge--neutral">Histórico</span></div><div class="disclosure-meta">1.009 envios no primeiro recorte · métricas específicas precisam de nova extração</div></div></summary>
+      <div class="disclosure-body">
     <p class="text-sm text-muted mb-16">Email automático disparado via workflow de cadastro. Contém link de compra de ingresso.</p>
 
     <div class="metric-grid metric-grid--4 mt-16">
@@ -2273,11 +2316,13 @@ td.num-right {
       </div>
     </div>
     <p class="note mt-16" style="font-size:12px; font-style:italic; color:rgba(255,255,255,0.4);">Nota: o workflow de cadastro tem 9.037 inscritos, mas o passo de envio de email foi adicionado após o setup inicial do CRM — apenas os 1.009 cadastros realizados a partir de jun/26 receberam o email de confirmação.</p>
-
-    <div class="divider"></div>
+      </div>
+    </details>
 
     <!-- Email — Recuperação Carrinho A/B -->
-    <h3 class="subsection-title">Email — Recuperação de Carrinho <span class="badge badge--amber" style="margin-left: 8px; font-size: 11px;">A/B Test</span></h3>
+    <details class="section-disclosure">
+      <summary><div><div class="disclosure-title">Email — Recuperação de Carrinho <span class="badge badge--neutral">Não recorrente</span></div><div class="disclosure-meta">Estrutura A/B preservada · nova ativação depende de aprovação</div></div></summary>
+      <div class="disclosure-body">
     <p class="text-sm text-muted mb-16">Emails automáticos da régua de carrinho abandonado. Template A e B em teste A/B.</p>
 
     <div class="metric-grid metric-grid--4 mt-16">
@@ -2334,6 +2379,9 @@ td.num-right {
       </div>
     </div>
     <p class="note">Teste A/B — ambas variantes disparam automaticamente via workflow de carrinho abandonado. Métricas serão atualizadas conforme os disparos acontecem.</p>
+      </div>
+    </details>
+    </div>
 
     <div class="divider"></div>
 
@@ -2416,6 +2464,16 @@ td.num-right {
       </div>
     </div>
     <p class="note">Custos das campanhas são estimativas históricas por mensagem. A conciliação definitiva entre Marketing e Utility depende do CSV detalhado da subconta; serviços de email aparecem separadamente na aba Financeiro.</p>
+
+    <div class="bcard proposal-card mt-32">
+      <div class="proposal-label">Próxima campanha</div>
+      <h3>Espaço preparado para nova recomendação</h3>
+      <p>Quando houver uma nova oportunidade de comunicação, este bloco receberá objetivo, público, canais, estimativa de volume, custo, cronograma e critério de sucesso antes da aprovação.</p>
+      <div class="finance-comparison mt-16">
+        <div class="finance-comparison-row"><span class="finance-comparison-label">Status</span><span class="finance-comparison-value">Sem proposta ativa</span></div>
+        <div class="finance-comparison-row"><span class="finance-comparison-label">Próxima decisão</span><span class="finance-comparison-value">Definir oportunidade + público</span></div>
+      </div>
+    </div>
   </div>
 </section>
 
@@ -2423,7 +2481,35 @@ td.num-right {
 <section id="carrinho" class="tab-content">
   <div class="section-inner">
     <h2 class="section-title">Recuperação de Carrinho</h2>
-    <p class="section-subtitle">Régua automatizada de recuperação com A/B test — resultados dos primeiros 40 carrinhos.</p>
+    <p class="section-subtitle">Oportunidade recorrente baseada no resultado do primeiro ciclo. Uma nova ativação depende de aprovação da Today.</p>
+    <div class="source-stamp">Pipeline atualizado pela API em 21/07/2026 às 19:52</div>
+
+    <div class="grid-2 mt-24">
+      <div class="bcard metric-card">
+        <div class="metric-value metric-value--roxo num">39</div>
+        <div class="metric-label">Oportunidades atuais em Negociação</div>
+      </div>
+      <div class="bcard metric-card">
+        <div class="metric-value metric-value--amber num"><span class="currency-symbol">R$</span> 209.939</div>
+        <div class="metric-label">Valor atual em Negociação</div>
+      </div>
+    </div>
+
+    <div class="bcard proposal-card mt-24">
+      <div class="proposal-label">Sugestão de campanha</div>
+      <h3>Ativar uma nova onda de recuperação de carrinho</h3>
+      <p>Usar o estoque atual de oportunidades em Negociação para uma régua aprovada de WhatsApp + email, com exclusão imediata de compradores e medição acumulativa de receita recuperada.</p>
+      <div class="finance-comparison mt-16">
+        <div class="finance-comparison-row"><span class="finance-comparison-label">Evidência do primeiro ciclo</span><span class="finance-comparison-value">10% · R$ 18.230 recuperados</span></div>
+        <div class="finance-comparison-row"><span class="finance-comparison-label">Status</span><span class="finance-comparison-value" style="color:var(--amber);">Aguardando aprovação</span></div>
+      </div>
+    </div>
+
+    <h3 class="subsection-title mt-48">Histórico do ciclo inicial</h3>
+    <div class="disclosure-stack">
+      <details class="section-disclosure">
+        <summary><div><div class="disclosure-title">Ver relatório completo do primeiro ciclo <span class="badge badge--neutral">Encerrado</span></div><div class="disclosure-meta">40 carrinhos · 4 conversões · R$ 18.230 recuperados · sem cupom</div></div></summary>
+        <div class="disclosure-body">
 
     <!-- Overview -->
     <div class="metric-grid metric-grid--4 mt-32">
@@ -2590,7 +2676,10 @@ td.num-right {
 
     <!-- Callout -->
     <div class="bcard mt-32" style="border-left: 3px solid var(--green);">
-      <strong>4 conversões aconteceram SEM cupom de desconto.</strong> A partir de 02/07, onda 2 inclui cupom CRM03 (5%). Comparar taxa com vs sem cupom.
+      <strong>4 conversões aconteceram sem cupom de desconto.</strong> Este resultado sustenta a recomendação de uma nova onda, mas não significa que a régua esteja recorrente hoje.
+    </div>
+        </div>
+      </details>
     </div>
   </div>
 </section>
@@ -2660,28 +2749,28 @@ td.num-right {
 <section id="insights" class="tab-content">
   <div class="section-inner">
     <h2 class="section-title">Insights & Próximos Passos</h2>
-    <p class="section-subtitle">O que funcionou, o que precisa melhorar e o roadmap para as próximas semanas.</p>
+    <p class="section-subtitle">Leitura executiva do primeiro ciclo e prioridades válidas a partir de 21/07/2026.</p>
 
     <!-- O que funcionou -->
     <h3 class="subsection-title mt-32">O que funcionou</h3>
     <div class="grid-2 mt-16">
       <div class="bcard insight-card insight-green">
-        <p><strong>info_atendimento performa 25x melhor</strong> que suporte_short. Template conversacional gera muito mais engajamento que mensagem curta e genérica.</p>
+        <p><strong>O template info_atendimento foi o melhor aprendizado de copy.</strong> A taxa agregada de resposta foi 17,5%, contra 0,7% do suporte_short no primeiro ciclo.</p>
       </div>
       <div class="bcard insight-card insight-green">
-        <p><strong>10% de conversão em carrinho abandonado SEM desconto.</strong> O follow-up automatizado por si só já recupera compras — cupom será bônus, não necessidade.</p>
+        <p><strong>O primeiro ciclo de carrinho recuperou R$ 18.230 sem desconto.</strong> Quatro conversões em 40 oportunidades sustentam a proposta de recorrência, ainda não aprovada.</p>
       </div>
       <div class="bcard insight-card insight-green">
-        <p><strong>94,8% taxa de entrega</strong> (vs 82,6% benchmark anterior). Base limpa + domínio autenticado elevam significativamente a entregabilidade.</p>
+        <p><strong>94,8% de entrega nas campanhas Frios.</strong> A base tratada e o domínio autenticado criaram uma referência operacional forte para as próximas ondas.</p>
       </div>
       <div class="bcard insight-card insight-green">
-        <p><strong>Custo por envio: <span class="num"><span class="currency-symbol">R$</span> 0,10</span> (Utility) vs <span class="num"><span class="currency-symbol">R$</span> 0,30</span> (Marketing).</strong> Economia de 67% por mensagem usando categoria correta.</p>
+        <p><strong>O pipeline continua avançando.</strong> A API registra 1.431 Engajados, 908 Interessados, 39 em Negociação e 223 em Comprou.</p>
       </div>
       <div class="bcard insight-card insight-green">
-        <p><strong>Bot 24/7 cobrindo fins de semana.</strong> Atendimento automatizado nos períodos em que a equipe não está disponível.</p>
+        <p><strong>A infraestrutura permanece ativa.</strong> São 37 workflows publicados no snapshot atual, com automações de cadastro, pipeline, tracking e atendimento.</p>
       </div>
       <div class="bcard insight-card insight-green">
-        <p><strong>Tracking granular de email implementado.</strong> Micro-WFs dedicados rastreiam abertura e clique por canal (cadastro + carrinho A/B), alimentando o pipeline automaticamente.</p>
+        <p><strong>O ROI já pode ser acompanhado de forma acumulativa.</strong> Receita recuperada de R$ 18.230 contra R$ 1.666 de fee pago representa 10,9x até 21/07.</p>
       </div>
     </div>
 
@@ -2689,25 +2778,25 @@ td.num-right {
     <h3 class="subsection-title mt-48">O que precisa melhorar</h3>
     <div class="grid-2 mt-16">
       <div class="bcard insight-card insight-amber">
-        <p><strong>Campanha D interrompida</strong> por falta de saldo na agência. Impactou volume de envios e teste do template suporte_operacional.</p>
+        <p><strong>Recuperação de carrinho ainda não é recorrente.</strong> O próximo ciclo precisa de aprovação explícita antes de ativar novamente WhatsApp e email.</p>
       </div>
       <div class="bcard insight-card insight-amber">
-        <p><strong>Tags de resposta com bug nos WFs de campanha.</strong> Métrica de respostas calculada via cruzamento, não via tag automática.</p>
+        <p><strong>A atribuição financeira do WhatsApp está incompleta.</strong> Sem o CSV detalhado, não é possível separar com segurança Marketing de Utility.</p>
       </div>
       <div class="bcard insight-card insight-amber">
-        <p><strong>Tracking de clique WhatsApp depende de Trigger Links</strong> — não existe "Wait for WA Link Clicked" nativo. Implementar na Onda 2 com templates novos.</p>
+        <p><strong>Tracking de clique do WhatsApp depende de Trigger Links.</strong> A próxima onda deve nascer com links rastreáveis e critério de conversão definido.</p>
       </div>
       <div class="bcard insight-card insight-red">
-        <p><strong>Mornos #1: 0 respostas em 111 leituras confirmadas.</strong> Template saudade_mornos_campanha2 teve entrega forte, mas não gerou engajamento. Copy precisa ser reformulado para Onda 2.</p>
+        <p><strong>Mornos #1 teve 0 respostas em 111 leituras confirmadas.</strong> A próxima abordagem precisa mudar copy, proposta de valor e CTA.</p>
       </div>
       <div class="bcard insight-card insight-red">
-        <p><strong>A campanha Quentes processou apenas 76 de 528 elegíveis.</strong> O diagnóstico anterior apontou a tag genérica cooldown_campanha como principal bloqueio. A lógica precisa ser revista por campanha específica antes da Onda 2.</p>
+        <p><strong>Quentes #1 processou apenas 76 de 528 elegíveis.</strong> A regra de cooldown e as exclusões precisam ser simuladas antes de qualquer nova onda.</p>
       </div>
       <div class="bcard insight-card insight-red">
-        <p><strong>Tags grupo_a/b/c/d/e aplicadas incorretamente.</strong> ~2.100 contatos receberam TODAS as 5 tags de grupo simultaneamente em vez de serem segmentados. Requer limpeza.</p>
+        <p><strong>Pendências antigas de tags precisam de reauditoria.</strong> Os casos grupo_a–e e disparo_quentes_1 não devem continuar como abertos sem nova validação.</p>
       </div>
       <div class="bcard insight-card insight-amber">
-        <p><strong>133 contatos presos com disparo_quentes_1.</strong> Ficaram travados no pipeline 72h+ — precisam de limpeza manual da tag.</p>
+        <p><strong>O bot ainda precisa ampliar cobertura.</strong> A próxima integração prioritária é conectar o atendimento ao Instagram e validar a efetividade das respostas.</p>
       </div>
     </div>
 
@@ -2718,35 +2807,32 @@ td.num-right {
 
     <div class="bcard mt-24" style="padding: 28px;">
       <div class="week-block">
-        <div class="wb-title"><span class="badge">Semana 1</span> 03-09/07</div>
+        <div class="wb-title"><span class="badge">Agora</span> 21–25/07</div>
         <ul class="checklist">
-          <li><span class="check check--done">&#x2714;</span>Disparar Mornos (461 elegíveis) — 03/07 · 385 processadas</li>
-          <li><span class="check check--done">&#x2714;</span>Disparar Quentes (528 elegíveis) — 03/07 · 76 processadas</li>
-          <li><span class="check check--done">&#x2714;</span>Tracking email: Waits abertura + micro-WFs clique (cadastro + carrinho)</li>
-          <li><span class="check check--done">&#x2714;</span>Monitorar respostas Mornos/Quentes — Mornos: 0 respostas · Quentes: 2 respostas</li>
-          <li><span class="check"></span>Limpar tags grupo_a/b/c/d/e (~2.100 contatos)</li>
-          <li><span class="check"></span>Limpar 133 contatos presos (disparo_quentes_1)</li>
-          <li><span class="check"></span>Revisar lógica cooldown_campanha (4.361 bloqueados)</li>
-          <li><span class="check"></span>Relatório pós-campanha</li>
+          <li><span class="check check--done">&#x2714;</span>Consolidar o primeiro ciclo de campanhas no dashboard</li>
+          <li><span class="check check--done">&#x2714;</span>Atualizar pipeline, contatos, workflows e valores pela API</li>
+          <li><span class="check"></span>Reauditar tags antigas antes de mantê-las como pendência</li>
+          <li><span class="check"></span>Exportar Wallet Transactions detalhado do Réveillon</li>
+          <li><span class="check"></span>Validar o funcionamento real do bot e mapear integração com Instagram</li>
         </ul>
       </div>
 
       <div class="week-block" style="margin-top: 24px;">
-        <div class="wb-title"><span class="badge">Semana 2</span> 10-16/07</div>
+        <div class="wb-title"><span class="badge">Decisão</span> até 30/07</div>
         <ul class="checklist">
-          <li><span class="check"></span>Criar WFs Onda 2 (mornos #2, quentes #2, carrinho onda2)</li>
-          <li><span class="check"></span>Template saudade_quentes_campanha2</li>
-          <li><span class="check"></span>Implementar Trigger Links pra tracking WA granular</li>
-          <li><span class="check"></span>Publicar Contador Inatividade</li>
-          <li><span class="check"></span>Configurar Trigger Links nos emails</li>
+          <li><span class="check"></span>Today aprovar ou recusar nova onda de recuperação de carrinho</li>
+          <li><span class="check"></span>Definir oportunidade e público da próxima campanha</li>
+          <li><span class="check"></span>Revisar cooldown, exclusões e copy antes de criar qualquer workflow</li>
+          <li><span class="check"></span>Registrar o segundo fee de R$ 2.500 e atualizar o ROI acumulado</li>
         </ul>
       </div>
 
       <div class="week-block" style="margin-top: 24px;">
-        <div class="wb-title"><span class="badge badge--neutral">Mes 2</span> jul-ago</div>
+        <div class="wb-title"><span class="badge badge--neutral">Próximo ciclo</span> após aprovação</div>
         <ul class="checklist">
-          <li><span class="check"></span>Início do setup CRM — Mundo Psicodélico (a partir de 07/07)</li>
-          <li><span class="check"></span>CRM geral Grupo Today (300K leads)</li>
+          <li><span class="check"></span>Criar proposta com volume, custo e critério de sucesso</li>
+          <li><span class="check"></span>Publicar workflows somente após QA das listas e Trigger Links</li>
+          <li><span class="check"></span>Acumular receita recuperada e comparar com fee total pago</li>
         </ul>
       </div>
 
@@ -2767,43 +2853,35 @@ td.num-right {
         </thead>
         <tbody>
           <tr>
-            <td>Limpar tags grupo_a/b/c/d/e (~2.100 contatos com TODAS as 5 tags)</td>
+            <td>Aprovar nova onda recorrente de recuperação de carrinho</td>
             <td><span class="prio-alta">Alta</span></td>
           </tr>
           <tr>
-            <td>Limpar 133 contatos presos com disparo_quentes_1</td>
+            <td>Reauditar cooldown_campanha, grupo_a–e e disparo_quentes_1 antes de qualquer limpeza</td>
             <td><span class="prio-alta">Alta</span></td>
           </tr>
           <tr>
-            <td>Revisar lógica cooldown_campanha (4.361 bloqueados = ~48% da base)</td>
+            <td>Exportar billing detalhado para separar Marketing × Utility</td>
             <td><span class="prio-alta">Alta</span></td>
           </tr>
           <tr>
-            <td>Reformular copy templates Onda 2 (Mornos teve 0% resposta)</td>
+            <td>Definir próxima campanha e reformular a abordagem de Mornos</td>
             <td><span class="prio-alta">Alta</span></td>
           </tr>
           <tr>
-            <td>WFs Onda 2</td>
-            <td><span class="prio-alta">Alta (~10/07)</span></td>
-          </tr>
-          <tr>
-            <td>Template saudade_quentes_campanha2</td>
-            <td><span class="prio-alta">Alta</span></td>
-          </tr>
-          <tr>
-            <td>Publicar Contador Inatividade</td>
+            <td>Conectar o bot ao Instagram e validar efetividade das respostas</td>
             <td><span class="prio-media">Média</span></td>
           </tr>
           <tr>
-            <td>Classificar Perdidos</td>
+            <td>Implementar Trigger Links nas próximas mensagens de WhatsApp</td>
             <td><span class="prio-media">Média</span></td>
           </tr>
           <tr>
-            <td>Trigger Links nos emails</td>
+            <td>Atualizar fee acumulado em 30/07</td>
             <td><span class="prio-media">Média</span></td>
           </tr>
           <tr>
-            <td>Links/cupons botões WA</td>
+            <td>Classificar oportunidades perdidas quando houver critério aprovado</td>
             <td><span class="prio-baixa">Baixa</span></td>
           </tr>
         </tbody>
@@ -2847,6 +2925,7 @@ td.num-right {
 
   tabs.forEach(btn => btn.addEventListener('click', () => switchTab(btn.dataset.tab)));
   mmBtns.forEach(btn => btn.addEventListener('click', () => switchTab(btn.dataset.tab)));
+  document.querySelectorAll('.internal-tab-link').forEach(btn => btn.addEventListener('click', () => switchTab(btn.dataset.tab)));
 
   // Hamburger toggle
   if (hamburger) {
