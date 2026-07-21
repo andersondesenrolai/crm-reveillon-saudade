@@ -4,6 +4,7 @@
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
 <title>CRM Report — Réveillon Saudade 2027</title>
+<link rel="icon" href="logo-desenrolai-branco.svg" type="image/svg+xml">
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
 <link href="https://fonts.googleapis.com/css2?family=Epilogue:wght@400;500;600;700;800&family=Inter:wght@400;500;600&family=Space+Grotesk:wght@600;700&display=swap" rel="stylesheet">
@@ -1435,6 +1436,53 @@ td.num-right {
 }
 .mobile-tip.show { opacity: 1; }
 
+/* ─── FINANCEIRO ─── */
+.finance-kpi-grid { display:grid; grid-template-columns:repeat(4,1fr); gap:12px; }
+.finance-kpi { min-height:132px; display:flex; flex-direction:column; justify-content:space-between; }
+.finance-kpi-label { color:rgba(255,255,255,.48); font-size:11px; font-weight:600; letter-spacing:.06em; text-transform:uppercase; }
+.finance-kpi-value { margin:10px 0 6px; font:700 29px 'Space Grotesk',sans-serif; letter-spacing:-.04em; }
+.finance-kpi-note { color:rgba(255,255,255,.45); font-size:11px; line-height:1.45; }
+.finance-split { display:grid; grid-template-columns:1.15fr .85fr; gap:16px; }
+.finance-month-list { display:grid; gap:18px; margin-top:22px; }
+.finance-month { display:grid; grid-template-columns:72px 1fr 78px; align-items:center; gap:12px; }
+.finance-month-label { color:rgba(255,255,255,.65); font-size:12px; font-weight:600; }
+.finance-month-value { color:rgba(255,255,255,.62); font:500 12px 'Space Grotesk',sans-serif; text-align:right; }
+.finance-bar-track { height:22px; overflow:hidden; border-radius:6px; background:rgba(255,255,255,.05); }
+.finance-bar-fill { height:100%; display:flex; min-width:2px; border-radius:inherit; overflow:hidden; }
+.finance-segment { height:100%; }
+.finance-segment--campanhas { background:var(--roxo); }
+.finance-segment--automacoes { background:var(--blue); }
+.finance-segment--infraestrutura { background:var(--amber); }
+.finance-segment--ia { background:var(--green); }
+.finance-segment--operacional { background:var(--gray-stage); }
+.finance-segment--nao_atribuido { background:var(--amber); }
+.finance-legend { display:flex; gap:14px; flex-wrap:wrap; margin-top:20px; }
+.finance-legend-item { display:inline-flex; align-items:center; gap:6px; color:rgba(255,255,255,.55); font-size:11px; }
+.finance-legend-dot { width:8px; height:8px; border-radius:2px; }
+.finance-comparison { display:grid; gap:10px; margin-top:18px; }
+.finance-comparison-row { display:flex; align-items:baseline; justify-content:space-between; gap:12px; padding:10px 0; border-bottom:1px solid rgba(255,255,255,.06); }
+.finance-comparison-row:last-child { border-bottom:none; }
+.finance-comparison-label { color:rgba(255,255,255,.48); font-size:12px; }
+.finance-comparison-value { font:600 15px 'Space Grotesk',sans-serif; text-align:right; }
+.finance-audit-grid { display:grid; grid-template-columns:repeat(4,1fr); gap:12px; }
+.finance-audit-value { margin-top:7px; font:600 17px 'Space Grotesk',sans-serif; }
+.finance-audit-note { margin-top:5px; color:rgba(255,255,255,.45); font-size:10px; line-height:1.45; }
+.finance-empty { color:rgba(255,255,255,.55); padding:20px; text-align:center; }
+
+@media (max-width:1100px) {
+  .finance-kpi-grid, .finance-audit-grid { grid-template-columns:repeat(2,1fr); }
+}
+@media (max-width:768px) {
+  .finance-split { grid-template-columns:1fr; }
+  .finance-month { grid-template-columns:58px 1fr 68px; gap:8px; }
+  .finance-month-label, .finance-month-value { font-size:10px; }
+}
+@media (max-width:480px) {
+  .finance-kpi-grid, .finance-audit-grid { grid-template-columns:1fr; gap:8px; }
+  .finance-kpi { min-height:112px; }
+  .finance-kpi-value { font-size:25px; }
+}
+
 /* ─── HELPERS ─── */
 .mt-0 { margin-top: 0; }
 .mt-16 { margin-top: 16px; }
@@ -1486,9 +1534,10 @@ td.num-right {
     <button class="tab-btn" data-tab="pipeline">Pipeline</button>
     <button class="tab-btn" data-tab="campanhas">Campanhas</button>
     <button class="tab-btn" data-tab="carrinho">Recuperação</button>
+    <button class="tab-btn" data-tab="financeiro">Financeiro</button>
     <button class="tab-btn" data-tab="insights">Insights</button>
   </div>
-  <div class="navbar-date">03/07/2026</div>
+  <div class="navbar-date">21/07/2026</div>
   <button class="hamburger" id="hamburgerBtn" aria-label="Menu">
     <span></span><span></span><span></span>
   </button>
@@ -1499,6 +1548,7 @@ td.num-right {
   <button class="mm-btn" data-tab="pipeline">Pipeline</button>
   <button class="mm-btn" data-tab="campanhas">Campanhas</button>
   <button class="mm-btn" data-tab="carrinho">Recuperação</button>
+  <button class="mm-btn" data-tab="financeiro">Financeiro</button>
   <button class="mm-btn" data-tab="insights">Insights</button>
 </div>
 
@@ -1529,8 +1579,8 @@ td.num-right {
 
     <div class="cover-metrics">
       <div class="bcard cover-metric">
-        <div class="cm-value num">9.078</div>
-        <div class="cm-label">Oportunidades <span class="info-tip" data-tip="Total de leads com oportunidade aberta no pipeline do Réveillon Saudade 2027.">&#x24D8;</span></div>
+        <div class="cm-value num">10.401</div>
+        <div class="cm-label">Oportunidades <span class="info-tip" data-tip="Snapshot da API em 21/07: soma dos cinco estágios principais do pipeline Réveillon Saudade 2027.">&#x24D8;</span></div>
       </div>
       <div class="bcard cover-metric">
         <div class="cm-value num">223</div>
@@ -1538,14 +1588,14 @@ td.num-right {
       </div>
       <div class="bcard cover-metric">
         <div class="cm-value num">989</div>
-        <div class="cm-label">Leads em campanha <span class="info-tip" data-tip="Campanhas WhatsApp em 03/07. Mornos: 461 disparados → 374 entregues → 0 respostas. Quentes: 528 disparados → 72 entregues → 2 respostas. Filtragem por cooldown_campanha reduziu alcance significativamente.">&#x24D8;</span></div>
+        <div class="cm-label">Elegíveis em campanha <span class="info-tip" data-tip="Campanhas WhatsApp de 03/07: 989 elegíveis, 461 mensagens processadas, 429 entregues ou lidas e 134 leituras confirmadas no snapshot de 21/07.">&#x24D8;</span></div>
       </div>
       <div class="bcard cover-metric">
         <div class="cm-value num"><span class="currency-symbol">R$</span> 997K</div>
         <div class="cm-label">Em pipeline <span class="info-tip" data-tip="Soma do valor de todas as oportunidades no estágio Comprou.">&#x24D8;</span></div>
       </div>
     </div>
-    <p class="cover-period">18 jun — 03 jul 2026</p>
+    <p class="cover-period">18 jun — 21 jul 2026</p>
     <div class="cover-footer">Confidencial — Grupo Today × Desenrola Aí — Julho 2026</div>
   </div>
 </section>
@@ -1751,18 +1801,18 @@ td.num-right {
     <!-- Snapshot -->
     <div class="metric-grid metric-grid--5 mt-32">
       <div class="bcard stage-card metric-card" data-stage="captado">
-        <div class="metric-value num">7.830</div>
-        <div class="metric-pct num">86,3%</div>
+        <div class="metric-value num">7.812</div>
+        <div class="metric-pct num">75,1%</div>
         <div class="metric-label">Lead Captado <span class="info-tip" data-tip="Leads que entraram no CRM via formulário de cadastro mas ainda não interagiram.">&#x24D8;</span></div>
       </div>
       <div class="bcard stage-card metric-card" data-stage="engajado">
-        <div class="metric-value num">461</div>
-        <div class="metric-pct num">5,1%</div>
+        <div class="metric-value num">1.423</div>
+        <div class="metric-pct num">13,7%</div>
         <div class="metric-label">Engajado <span class="info-tip" data-tip="Leads que abriram email ou responderam WhatsApp — demonstraram atenção.">&#x24D8;</span></div>
       </div>
       <div class="bcard stage-card metric-card" data-stage="interessado">
-        <div class="metric-value num">528</div>
-        <div class="metric-pct num">5,8%</div>
+        <div class="metric-value num">904</div>
+        <div class="metric-pct num">8,7%</div>
         <div class="metric-label">Interessado <span class="info-tip" data-tip="Leads que clicaram em link de compra — demonstraram intenção.">&#x24D8;</span></div>
       </div>
       <div class="bcard stage-card metric-card" data-stage="negociacao">
@@ -1772,7 +1822,7 @@ td.num-right {
       </div>
       <div class="bcard stage-card metric-card" data-stage="comprou">
         <div class="metric-value metric-value--green num">223</div>
-        <div class="metric-pct num">2,5%</div>
+        <div class="metric-pct num">2,1%</div>
         <div class="metric-label">Comprou <span class="info-tip" data-tip="Leads que efetivaram compra de ingresso. Confirmados via planilha MeuBilhete.">&#x24D8;</span></div>
       </div>
     </div>
@@ -1782,20 +1832,20 @@ td.num-right {
     <div class="funnel">
       <div class="funnel-stage" style="width:100%; background: linear-gradient(90deg, rgba(161,161,170,0.15), rgba(161,161,170,0.08)); border: 1px solid rgba(161,161,170,0.25);">
         <span class="fs-name">Lead Captado</span>
-        <span class="fs-count num">7.830</span>
-        <span class="fs-pct num">86,3%</span>
+        <span class="fs-count num">7.812</span>
+        <span class="fs-pct num">75,1%</span>
       </div>
       <div class="funnel-arrow"></div>
       <div class="funnel-stage" style="width:72%; background: linear-gradient(90deg, rgba(67,160,71,0.18), rgba(67,160,71,0.08)); border: 1px solid rgba(67,160,71,0.3);">
         <span class="fs-name">Engajado</span>
-        <span class="fs-count num">461</span>
-        <span class="fs-pct num">5,1%</span>
+        <span class="fs-count num">1.423</span>
+        <span class="fs-pct num">13,7%</span>
       </div>
       <div class="funnel-arrow"></div>
       <div class="funnel-stage" style="width:54%; background: linear-gradient(90deg, rgba(66,165,245,0.18), rgba(66,165,245,0.08)); border: 1px solid rgba(66,165,245,0.3);">
         <span class="fs-name">Interessado</span>
-        <span class="fs-count num">528</span>
-        <span class="fs-pct num">5,8%</span>
+        <span class="fs-count num">904</span>
+        <span class="fs-pct num">8,7%</span>
       </div>
       <div class="funnel-arrow"></div>
       <div class="funnel-stage" style="width:36%; background: linear-gradient(90deg, rgba(255,167,38,0.18), rgba(255,167,38,0.08)); border: 1px solid rgba(255,167,38,0.3);">
@@ -1807,7 +1857,7 @@ td.num-right {
       <div class="funnel-stage" style="width:24%; background: linear-gradient(90deg, rgba(67,160,71,0.22), rgba(67,160,71,0.1)); border: 1px solid rgba(67,160,71,0.4);">
         <span class="fs-name">Comprou</span>
         <span class="fs-count num">223</span>
-        <span class="fs-pct num">2,5%</span>
+        <span class="fs-pct num">2,1%</span>
       </div>
     </div>
 
@@ -1815,14 +1865,14 @@ td.num-right {
     <h3 class="subsection-title mt-48">Movimentação entre Estágios</h3>
     <div class="grid-3 mt-16">
       <div class="bcard movement-card">
-        <div class="mc-title">Lead Captado &rarr; Engajado (<span class="num">461</span>)</div>
-        <div class="mc-item">Email aberto <span class="num">~363 leads</span></div>
-        <div class="mc-item">WhatsApp respondido <span class="num">~98 leads</span></div>
+        <div class="mc-title">Lead Captado &rarr; Engajado (<span class="num">1.423</span>)</div>
+        <div class="mc-item">Participação no pipeline <span class="num">13,7%</span></div>
+        <div class="mc-item">Critério <span class="num">abriu email ou respondeu WA</span></div>
       </div>
       <div class="bcard movement-card">
-        <div class="mc-title">Engajado &rarr; Interessado (<span class="num">528</span>)</div>
-        <div class="mc-item">Link de compra clicado <span class="num">~352 leads</span></div>
-        <div class="mc-item">Campanha quentes <span class="num">~176 leads</span></div>
+        <div class="mc-title">Engajado &rarr; Interessado (<span class="num">904</span>)</div>
+        <div class="mc-item">Participação no pipeline <span class="num">8,7%</span></div>
+        <div class="mc-item">Critério <span class="num">clique ou intenção</span></div>
       </div>
       <div class="bcard movement-card">
         <div class="mc-title">&rarr; Comprou (<span class="num">223</span>)</div>
@@ -2061,29 +2111,29 @@ td.num-right {
     <div class="metric-grid metric-grid--4 mt-16">
       <div class="bcard metric-card">
         <div class="metric-value num">461</div>
-        <div class="metric-label">Leads disparados <span class="info-tip" data-tip="461 leads segmentados para a campanha. Destes, 385 entraram no WF (76 filtrados por validação de WhatsApp/DND). 374 mensagens confirmadas como entregues.">&#x24D8;</span></div>
+        <div class="metric-label">Elegíveis <span class="info-tip" data-tip="461 contatos compunham o segmento da campanha Mornos #1.">&#x24D8;</span></div>
       </div>
       <div class="bcard metric-card">
-        <div class="metric-value num" style="color: var(--red);">0</div>
-        <div class="metric-sub" style="font-size:11px; color:rgba(255,255,255,0.45); margin-top:2px;">0% taxa de resposta</div>
-        <div class="metric-label">Responderam <span class="info-tip" data-tip="Zero respostas após 72h+. 358 leads leram a mensagem mas não interagiram. Copy do template não gerou engajamento — reavaliar para Onda 2.">&#x24D8;</span></div>
+        <div class="metric-value num">385</div>
+        <div class="metric-sub" style="font-size:11px; color:rgba(255,255,255,0.45); margin-top:2px;">83,5% dos elegíveis</div>
+        <div class="metric-label">Processadas <span class="info-tip" data-tip="Mensagens encontradas no export da API entre 03 e 05/07 para o corpo da campanha.">&#x24D8;</span></div>
       </div>
       <div class="bcard metric-card">
-        <div class="metric-value num" style="color: var(--green);">97,1%</div>
-        <div class="metric-sub" style="font-size:11px; color:rgba(255,255,255,0.45); margin-top:2px;">374 de 385 enviados</div>
-        <div class="metric-label">Taxa de entrega <span class="info-tip" data-tip="374 mensagens entregues de 385 enviadas pelo WF. 358 lidas (95,7%). Alta entrega e leitura, mas zero interação.">&#x24D8;</span></div>
+        <div class="metric-value num" style="color: var(--green);">358</div>
+        <div class="metric-sub" style="font-size:11px; color:rgba(255,255,255,0.45); margin-top:2px;">93,0% das processadas</div>
+        <div class="metric-label">Entregues ou lidas <span class="info-tip" data-tip="Soma dos status atuais delivered e read. O status read substitui delivered; por isso as duas categorias são consolidadas.">&#x24D8;</span></div>
       </div>
       <div class="bcard metric-card">
-        <div class="metric-value num"><span style="font-size:0.35em; font-weight:400; opacity:0.5; font-family:'Inter',sans-serif;">Aprox.</span> <span class="currency-symbol">R$</span> 112</div>
-        <div class="metric-pct num" style="font-size:11px; color:rgba(255,255,255,0.4);">Marketing · R$ 0,30/msg</div>
-        <div class="metric-label">Custo real <span class="info-tip" data-tip="Custo baseado em mensagens entregues: 374 × R$ 0,30 = R$ 112. Estimativa anterior (R$ 138) era baseada nos 461 disparados.">&#x24D8;</span></div>
+        <div class="metric-value num">111</div>
+        <div class="metric-sub" style="font-size:11px; color:rgba(255,255,255,0.45); margin-top:2px;">31,0% das entregues/lidas</div>
+        <div class="metric-label">Leituras confirmadas <span class="info-tip" data-tip="Mensagens cujo status atual na API é read. Não confundir com o total entregue ou lido.">&#x24D8;</span></div>
       </div>
     </div>
 
     <!-- Nota sobre filtragem -->
     <div class="bcard mt-16" style="padding: 14px 18px; border-left: 3px solid var(--amber); background: rgba(249,168,37,0.06);">
       <p style="font-size: 13px; color: rgba(255,255,255,0.7); line-height: 1.6; margin: 0;">
-        <strong style="color: var(--amber);">Filtragem do WF:</strong> Dos 461 leads disparados, <strong>76 foram filtrados</strong> antes do envio (sem WhatsApp válido, DND ou condições do WF). 385 mensagens foram efetivamente enviadas, 374 entregues e 358 lidas. O copy do template não gerou nenhuma resposta — recomenda-se reavaliar a abordagem para a Onda 2.
+        <strong style="color: var(--amber);">Leitura correta do funil:</strong> 461 contatos eram elegíveis e 385 mensagens foram processadas. Dessas, 358 estão entregues ou lidas, 111 têm leitura confirmada, 11 falharam e 16 permanecem em status enviado. Nenhuma resposta foi identificada — o copy deve ser revisto para a Onda 2.
       </p>
     </div>
 
@@ -2095,11 +2145,13 @@ td.num-right {
             <th>Campanha</th>
             <th>Template</th>
             <th>Tipo</th>
-            <th style="text-align:right">Disparados</th>
-            <th style="text-align:right">Entregues</th>
+            <th style="text-align:right">Elegíveis</th>
+            <th style="text-align:right">Processadas</th>
+            <th style="text-align:right">Entregues/lidas</th>
+            <th style="text-align:right">Leituras</th>
             <th style="text-align:right">Responderam</th>
             <th style="text-align:right">Taxa de resposta</th>
-            <th style="text-align:right">Custo real</th>
+            <th style="text-align:right">Custo estimado</th>
           </tr>
         </thead>
         <tbody>
@@ -2108,16 +2160,18 @@ td.num-right {
             <td><code style="font-size:12px; background:rgba(255,255,255,0.06); padding:2px 6px; border-radius:4px;">saudade_mornos_campanha2</code></td>
             <td><span class="badge" style="font-size:10px; padding:3px 8px;">Marketing</span></td>
             <td class="num-right">461</td>
-            <td class="num-right">374</td>
+            <td class="num-right">385</td>
+            <td class="num-right">358</td>
+            <td class="num-right">111</td>
             <td class="num-right" style="color: var(--red);">0</td>
             <td class="num-right" style="color: var(--red);">0%</td>
-            <td class="num-right">R$ 112</td>
+            <td class="num-right">Aprox. R$ 107</td>
           </tr>
         </tbody>
       </table>
       </div>
     </div>
-    <p class="note">Disparado em 03/07 10:00 AM · 461 na lista → 385 enviados pelo WF → 374 entregues → 358 lidos → 0 responderam<br>76 leads filtrados (sem WhatsApp válido ou DND). Taxa de leitura: 95,7%.</p>
+    <p class="note">Snapshot em 21/07 · 461 elegíveis → 385 processadas → 358 entregues ou lidas → 111 leituras confirmadas → 0 respostas. Taxa de sucesso de entrega: 93,0%; leitura sobre entregues/lidas: 31,0%.</p>
 
     <div class="divider"></div>
 
@@ -2127,29 +2181,29 @@ td.num-right {
     <div class="metric-grid metric-grid--4 mt-16">
       <div class="bcard metric-card">
         <div class="metric-value num">528</div>
-        <div class="metric-label">Leads disparados <span class="info-tip" data-tip="528 leads segmentados para a campanha. Apenas 75 mensagens enviadas pelo WF — 451 filtrados pela tag cooldown_campanha (aplicada em campanhas anteriores). 133 ainda presos no pipeline.">&#x24D8;</span></div>
+        <div class="metric-label">Elegíveis <span class="info-tip" data-tip="528 contatos compunham o segmento da campanha Quentes #1.">&#x24D8;</span></div>
       </div>
       <div class="bcard metric-card">
-        <div class="metric-value num" style="color: var(--amber);">2</div>
-        <div class="metric-sub" style="font-size:11px; color:rgba(255,255,255,0.45); margin-top:2px;">2,7% taxa de resposta</div>
-        <div class="metric-label">Responderam <span class="info-tip" data-tip="2 leads responderam à mensagem WhatsApp dentre os 75 que efetivamente receberam. Taxa baixa, mas acima dos Mornos (0%).">&#x24D8;</span></div>
+        <div class="metric-value num">76</div>
+        <div class="metric-sub" style="font-size:11px; color:rgba(255,255,255,0.45); margin-top:2px;">14,4% dos elegíveis</div>
+        <div class="metric-label">Processadas <span class="info-tip" data-tip="Mensagens encontradas no export da API entre 03 e 05/07 para o corpo da campanha.">&#x24D8;</span></div>
       </div>
       <div class="bcard metric-card">
-        <div class="metric-value num" style="color: var(--green);">96%</div>
-        <div class="metric-sub" style="font-size:11px; color:rgba(255,255,255,0.45); margin-top:2px;">72 de 75 enviados</div>
-        <div class="metric-label">Taxa de entrega <span class="info-tip" data-tip="72 mensagens entregues de 75 enviadas. 24 confirmadas como lidas (33,3%). Taxa de entrega alta, leitura mais baixa que Mornos.">&#x24D8;</span></div>
+        <div class="metric-value num" style="color: var(--green);">71</div>
+        <div class="metric-sub" style="font-size:11px; color:rgba(255,255,255,0.45); margin-top:2px;">93,4% das processadas</div>
+        <div class="metric-label">Entregues ou lidas <span class="info-tip" data-tip="Soma dos status atuais delivered e read. O status read substitui delivered; por isso as duas categorias são consolidadas.">&#x24D8;</span></div>
       </div>
       <div class="bcard metric-card">
-        <div class="metric-value num"><span style="font-size:0.35em; font-weight:400; opacity:0.5; font-family:'Inter',sans-serif;">Aprox.</span> <span class="currency-symbol">R$</span> 22</div>
-        <div class="metric-pct num" style="font-size:11px; color:rgba(255,255,255,0.4);">Marketing · R$ 0,30/msg</div>
-        <div class="metric-label">Custo real <span class="info-tip" data-tip="Custo baseado em mensagens entregues: 72 × R$ 0,30 = R$ 21,60. Estimativa anterior (R$ 158) era baseada nos 528 disparados — a maioria foi filtrada pelo cooldown.">&#x24D8;</span></div>
+        <div class="metric-value num">23</div>
+        <div class="metric-sub" style="font-size:11px; color:rgba(255,255,255,0.45); margin-top:2px;">32,4% das entregues/lidas</div>
+        <div class="metric-label">Leituras confirmadas <span class="info-tip" data-tip="Mensagens cujo status atual na API é read. Não confundir com o total entregue ou lido.">&#x24D8;</span></div>
       </div>
     </div>
 
     <!-- Nota sobre filtragem -->
     <div class="bcard mt-16" style="padding: 14px 18px; border-left: 3px solid var(--red); background: rgba(229,57,53,0.06);">
       <p style="font-size: 13px; color: rgba(255,255,255,0.7); line-height: 1.6; margin: 0;">
-        <strong style="color: var(--red);">Filtragem crítica:</strong> Dos 528 leads disparados, <strong>451 foram filtrados</strong> pela tag <code style="font-size:11px; background:rgba(255,255,255,0.08); padding:1px 5px; border-radius:3px;">cooldown_campanha</code> (aplicada nas campanhas Frios A–E anteriores). Apenas 75 mensagens foram enviadas, 72 entregues e 24 lidas. <strong>133 contatos ainda com tag de disparo</strong> — precisam de limpeza manual. A lógica de cooldown precisa ser revista para a Onda 2.
+        <strong style="color: var(--red);">Filtragem crítica:</strong> Dos 528 elegíveis, apenas <strong>76 mensagens foram processadas</strong>. O snapshot registra 71 entregues ou lidas, 23 leituras confirmadas, 2 falhas e 3 ainda enviadas. Duas respostas foram identificadas (2,6% das processadas). A lógica de <code style="font-size:11px; background:rgba(255,255,255,0.08); padding:1px 5px; border-radius:3px;">cooldown_campanha</code> deve ser revista para a Onda 2.
       </p>
     </div>
 
@@ -2161,11 +2215,13 @@ td.num-right {
             <th>Campanha</th>
             <th>Template</th>
             <th>Tipo</th>
-            <th style="text-align:right">Disparados</th>
-            <th style="text-align:right">Entregues</th>
+            <th style="text-align:right">Elegíveis</th>
+            <th style="text-align:right">Processadas</th>
+            <th style="text-align:right">Entregues/lidas</th>
+            <th style="text-align:right">Leituras</th>
             <th style="text-align:right">Responderam</th>
             <th style="text-align:right">Taxa de resposta</th>
-            <th style="text-align:right">Custo real</th>
+            <th style="text-align:right">Custo estimado</th>
           </tr>
         </thead>
         <tbody>
@@ -2174,16 +2230,18 @@ td.num-right {
             <td><code style="font-size:12px; background:rgba(255,255,255,0.06); padding:2px 6px; border-radius:4px;">saudade_quente_lineup_220626</code></td>
             <td><span class="badge" style="font-size:10px; padding:3px 8px;">Marketing</span></td>
             <td class="num-right">528</td>
-            <td class="num-right">72</td>
+            <td class="num-right">76</td>
+            <td class="num-right">71</td>
+            <td class="num-right">23</td>
             <td class="num-right" style="color: var(--amber);">2</td>
-            <td class="num-right" style="color: var(--amber);">2,7%</td>
-            <td class="num-right">R$ 22</td>
+            <td class="num-right" style="color: var(--amber);">2,6%</td>
+            <td class="num-right">Aprox. R$ 21</td>
           </tr>
         </tbody>
       </table>
       </div>
     </div>
-    <p class="note">Disparado em 03/07 02:50 PM · 528 na lista → 75 enviados pelo WF → 72 entregues → 24 lidos → 2 responderam<br>451 leads filtrados por cooldown_campanha. 133 ainda com tag disparo_quentes_1 (pendente limpeza).</p>
+    <p class="note">Snapshot em 21/07 · 528 elegíveis → 76 processadas → 71 entregues ou lidas → 23 leituras confirmadas → 2 respostas. Taxa de sucesso de entrega: 93,4%; resposta sobre processadas: 2,6%.</p>
 
     <div class="divider"></div>
 
@@ -2317,17 +2375,17 @@ td.num-right {
             <td>WhatsApp</td>
             <td>Mornos #1</td>
             <td><span class="badge" style="font-size:10px; padding:3px 8px;">Marketing</span></td>
-            <td class="num-right">374 <span style="font-size:10px; color:rgba(255,255,255,0.35);">(461 disp.)</span></td>
+            <td class="num-right">385 <span style="font-size:10px; color:rgba(255,255,255,0.35);">(461 eleg.)</span></td>
             <td class="num-right" style="color: var(--red);">0%</td>
-            <td class="num-right">R$ 112</td>
+            <td class="num-right">Aprox. R$ 107</td>
           </tr>
           <tr>
             <td>WhatsApp</td>
             <td>Quentes #1</td>
             <td><span class="badge" style="font-size:10px; padding:3px 8px;">Marketing</span></td>
-            <td class="num-right">72 <span style="font-size:10px; color:rgba(255,255,255,0.35);">(528 disp.)</span></td>
-            <td class="num-right" style="color: var(--amber);">2,7%</td>
-            <td class="num-right">R$ 22</td>
+            <td class="num-right">76 <span style="font-size:10px; color:rgba(255,255,255,0.35);">(528 eleg.)</span></td>
+            <td class="num-right" style="color: var(--amber);">2,6%</td>
+            <td class="num-right">Aprox. R$ 21</td>
           </tr>
           <tr>
             <td>Email</td>
@@ -2349,15 +2407,15 @@ td.num-right {
         <tfoot>
           <tr>
             <td colspan="3" style="font-weight: 600; color: rgba(255,255,255,0.6);">Total</td>
-            <td class="num-right" style="font-weight: 600;">9.375+ impressões</td>
+            <td class="num-right" style="font-weight: 600;">9.527+ impressões</td>
             <td class="num-right" style="font-weight: 600;"></td>
-            <td class="num-right" style="font-weight: 600;">Aprox. R$ 948</td>
+            <td class="num-right" style="font-weight: 600;">Aprox. R$ 942</td>
           </tr>
         </tfoot>
       </table>
       </div>
     </div>
-    <p class="note">Custos de WhatsApp são estimativas baseadas no preço por mensagem da Meta. Email não tem custo adicional na plataforma.</p>
+    <p class="note">Custos das campanhas são estimativas históricas por mensagem. A conciliação definitiva entre Marketing e Utility depende do CSV detalhado da subconta; serviços de email aparecem separadamente na aba Financeiro.</p>
   </div>
 </section>
 
@@ -2537,7 +2595,68 @@ td.num-right {
   </div>
 </section>
 
-<!-- ════════════════════════ TAB 6: INSIGHTS ════════════════════════ -->
+<!-- ════════════════════════ TAB 6: FINANCEIRO ════════════════════════ -->
+<section id="financeiro" class="tab-content">
+  <div class="section-inner">
+    <h2 class="section-title">Financeiro</h2>
+    <p class="section-subtitle">Consumo da subconta, classificação de custos e trilha de auditoria em uma base normalizada.</p>
+
+    <div class="callout callout--amber mt-32">
+      <strong>Conciliação preliminar.</strong> O snapshot disponível consolida WhatsApp sem separar mensagens Marketing e Utility. Os totais abaixo são exatos para o painel recebido; a divisão entre campanhas e automações permanece pendente até o CSV detalhado da subconta.
+    </div>
+
+    <div class="finance-kpi-grid mt-24" id="financeKpis" aria-live="polite"></div>
+
+    <div class="finance-split mt-32">
+      <div class="bcard">
+        <h3>Consumo mensal</h3>
+        <p class="text-sm text-muted mt-16">Distribuição do painel por competência, em USD.</p>
+        <div class="finance-month-list" id="financeMonthly"></div>
+        <div class="finance-legend" id="financeLegend"></div>
+      </div>
+      <div class="bcard">
+        <div style="display:flex; align-items:center; justify-content:space-between; gap:12px;">
+          <h3>Orçamento × realizado</h3>
+          <span class="badge badge--neutral">Aguardando baseline</span>
+        </div>
+        <div class="finance-comparison" id="financeComparison"></div>
+      </div>
+    </div>
+
+    <h3 class="subsection-title mt-48">Detalhamento normalizado</h3>
+    <p class="text-sm text-muted mb-16">Cada linha preserva fonte, nível de confiança e pendências de classificação.</p>
+    <div class="bcard" style="padding:0;">
+      <div class="table-scroll">
+        <table>
+          <thead>
+            <tr>
+              <th>Competência</th>
+              <th>Campanha / workflow</th>
+              <th>Canal</th>
+              <th>SKU</th>
+              <th>Status</th>
+              <th style="text-align:right">Eventos</th>
+              <th style="text-align:right">Unit. USD</th>
+              <th style="text-align:right">Total USD</th>
+              <th style="text-align:right">Total BRL</th>
+              <th>Fonte</th>
+              <th>Confiança</th>
+            </tr>
+          </thead>
+          <tbody id="financeDetails"></tbody>
+        </table>
+      </div>
+    </div>
+
+    <h3 class="subsection-title mt-48">Auditoria e cobertura</h3>
+    <div class="finance-audit-grid mt-16" id="financeAudit"></div>
+    <div class="callout callout--roxo mt-24">
+      <strong>Próximo passo de dados:</strong> exportar Wallet Transactions desta location para reconciliar Marketing × Utility, atribuir custos a campanhas e automações e comparar com um orçamento aprovado equivalente.
+    </div>
+  </div>
+</section>
+
+<!-- ════════════════════════ TAB 7: INSIGHTS ════════════════════════ -->
 <section id="insights" class="tab-content">
   <div class="section-inner">
     <h2 class="section-title">Insights & Próximos Passos</h2>
@@ -2579,10 +2698,10 @@ td.num-right {
         <p><strong>Tracking de clique WhatsApp depende de Trigger Links</strong> — não existe "Wait for WA Link Clicked" nativo. Implementar na Onda 2 com templates novos.</p>
       </div>
       <div class="bcard insight-card insight-red">
-        <p><strong>Mornos #1: 0 respostas em 358 leituras.</strong> Template saudade_mornos_campanha2 foi lido mas não gerou engajamento. Copy precisa ser reformulado para Onda 2.</p>
+        <p><strong>Mornos #1: 0 respostas em 111 leituras confirmadas.</strong> Template saudade_mornos_campanha2 teve entrega forte, mas não gerou engajamento. Copy precisa ser reformulado para Onda 2.</p>
       </div>
       <div class="bcard insight-card insight-red">
-        <p><strong>cooldown_campanha bloqueou 85% dos Quentes.</strong> 451 de 528 leads filtrados. Tag genérica de cooldown aplicada nas campanhas Frios impediu o alcance. Lógica precisa ser revista (cooldown por campanha específica).</p>
+        <p><strong>A campanha Quentes processou apenas 76 de 528 elegíveis.</strong> O diagnóstico anterior apontou a tag genérica cooldown_campanha como principal bloqueio. A lógica precisa ser revista por campanha específica antes da Onda 2.</p>
       </div>
       <div class="bcard insight-card insight-red">
         <p><strong>Tags grupo_a/b/c/d/e aplicadas incorretamente.</strong> ~2.100 contatos receberam TODAS as 5 tags de grupo simultaneamente em vez de serem segmentados. Requer limpeza.</p>
@@ -2601,8 +2720,8 @@ td.num-right {
       <div class="week-block">
         <div class="wb-title"><span class="badge">Semana 1</span> 03-09/07</div>
         <ul class="checklist">
-          <li><span class="check check--done">&#x2714;</span>Disparar Mornos (461 leads) — 03/07 ✅ 100% sucesso</li>
-          <li><span class="check check--done">&#x2714;</span>Disparar Quentes (528 leads) — 03/07</li>
+          <li><span class="check check--done">&#x2714;</span>Disparar Mornos (461 elegíveis) — 03/07 · 385 processadas</li>
+          <li><span class="check check--done">&#x2714;</span>Disparar Quentes (528 elegíveis) — 03/07 · 76 processadas</li>
           <li><span class="check check--done">&#x2714;</span>Tracking email: Waits abertura + micro-WFs clique (cadastro + carrinho)</li>
           <li><span class="check check--done">&#x2714;</span>Monitorar respostas Mornos/Quentes — Mornos: 0 respostas · Quentes: 2 respostas</li>
           <li><span class="check"></span>Limpar tags grupo_a/b/c/d/e (~2.100 contatos)</li>
@@ -2698,10 +2817,11 @@ td.num-right {
 
 <!-- ════════════════════════ FOOTER ════════════════════════ -->
 <footer class="page-footer">
-  Última atualização: 06 de julho de 2026 &middot; Confidencial — Grupo Today × Desenrola Aí
+  Última atualização: 21 de julho de 2026 &middot; Confidencial — Grupo Today × Desenrola Aí
 </footer>
 
 <!-- ════════════════════════ JS ════════════════════════ -->
+<script src="data/financeiro-data.js"></script>
 <script>
 (function() {
   /* ── Tab Navigation ── */
@@ -2786,12 +2906,12 @@ td.num-right {
     {
       date: '03/07',
       title: 'Disparos Mornos + Quentes',
-      body: '461 Mornos (10h) + 528 Quentes (14h). Total: 989 disparados, 446 entregues (filtragem por cooldown).'
+      body: '989 contatos elegíveis: 461 Mornos + 528 Quentes. A API registra 461 mensagens processadas e 429 entregues ou lidas no período auditado.'
     },
     {
       date: '06/07',
       title: 'Resultados campanhas + diagnóstico',
-      body: 'Mornos: 374 entregues, 0 respostas. Quentes: 72 entregues, 2 respostas. Identificado: cooldown bloqueou 85% dos Quentes + tags grupo aplicadas errado em ~2.100 contatos.'
+      body: 'Snapshot atualizado em 21/07: Mornos com 358 entregues ou lidas e 111 leituras confirmadas; Quentes com 71 entregues ou lidas, 23 leituras confirmadas e 2 respostas.'
     }
   ];
 
@@ -2830,6 +2950,94 @@ td.num-right {
   document.addEventListener('keydown', (e) => {
     if (e.key === 'Escape') closePopup();
   });
+
+  /* ── Financeiro ── */
+  function renderFinanceiro() {
+    const data = window.FINANCEIRO_DATA;
+    const kpiRoot = document.getElementById('financeKpis');
+    if (!data || !kpiRoot) return;
+
+    const summary = data.summary || {};
+    const snapshot = data.operationalSnapshot || {};
+    const audit = data.audit || {};
+    const forecast = data.forecast || {};
+    const brl = value => value == null ? '—' : new Intl.NumberFormat('pt-BR', { style: 'currency', currency: 'BRL' }).format(value);
+    const usd = value => value == null ? '—' : `US$ ${new Intl.NumberFormat('pt-BR', { minimumFractionDigits: 2, maximumFractionDigits: 2 }).format(value)}`;
+    const number = value => value == null ? '—' : new Intl.NumberFormat('pt-BR').format(value);
+    const escapeHtml = value => String(value == null ? '—' : value).replace(/[&<>'"]/g, char => ({ '&':'&amp;', '<':'&lt;', '>':'&gt;', "'":'&#39;', '"':'&quot;' }[char]));
+
+    const cards = [
+      ['Consumo total', usd(summary.totalUsd), `${brl(summary.totalBrl)} pela PTAX de ${data.exchange.date.split('-').reverse().join('/')}`],
+      ['WhatsApp sem split', usd(summary.unattributedUsd), 'Marketing + Utility; classificação pendente'],
+      ['Serviços de email', usd(summary.operationalUsd), 'Custo operacional consolidado no painel'],
+      ['Conversation AI', usd(summary.aiUsd), 'Conversation and Voice AI'],
+      ['Campanhas', '—', 'Aguarda split Marketing × Utility'],
+      ['Automações', '—', 'Aguarda CSV detalhado da location'],
+      ['Contatos', number(snapshot.contacts), 'Snapshot da API em 21/07/2026'],
+      ['Workflows', number(snapshot.workflows && snapshot.workflows.total), `${number(snapshot.workflows && snapshot.workflows.published)} publicados · ${number(snapshot.workflows && snapshot.workflows.draft)} rascunhos`]
+    ];
+    kpiRoot.innerHTML = cards.map(([label, value, note]) => `
+      <div class="bcard finance-kpi">
+        <div class="finance-kpi-label">${escapeHtml(label)}</div>
+        <div class="finance-kpi-value">${escapeHtml(value)}</div>
+        <div class="finance-kpi-note">${escapeHtml(note)}</div>
+      </div>`).join('');
+
+    const months = data.monthly || [];
+    const maxMonth = Math.max(...months.map(item => item.totalUsd || 0), 1);
+    const monthLabel = value => {
+      const [year, month] = value.split('-').map(Number);
+      return new Intl.DateTimeFormat('pt-BR', { month: 'short', year: '2-digit', timeZone: 'UTC' }).format(new Date(Date.UTC(year, month - 1, 1))).replace('.', '');
+    };
+    document.getElementById('financeMonthly').innerHTML = months.map(item => `
+      <div class="finance-month">
+        <div class="finance-month-label">${escapeHtml(monthLabel(item.month))}</div>
+        <div class="finance-bar-track" title="${escapeHtml(usd(item.totalUsd))}">
+          <div class="finance-bar-fill" style="width:${Math.max((item.totalUsd / maxMonth) * 100, 1)}%">
+            <span class="finance-segment finance-segment--nao_atribuido" style="width:100%"></span>
+          </div>
+        </div>
+        <div class="finance-month-value">${escapeHtml(usd(item.totalUsd))}</div>
+      </div>`).join('');
+    document.getElementById('financeLegend').innerHTML = '<span class="finance-legend-item"><span class="finance-legend-dot finance-segment--nao_atribuido"></span>WhatsApp sem atribuição + demais itens do painel</span>';
+
+    document.getElementById('financeComparison').innerHTML = `
+      <div class="finance-comparison-row"><span class="finance-comparison-label">Orçamento aprovado</span><span class="finance-comparison-value">Não localizado</span></div>
+      <div class="finance-comparison-row"><span class="finance-comparison-label">Realizado no painel</span><span class="finance-comparison-value">${escapeHtml(usd(summary.totalUsd))}</span></div>
+      <div class="finance-comparison-row"><span class="finance-comparison-label">Variação</span><span class="finance-comparison-value">Aguarda orçamento</span></div>
+      <p class="finance-kpi-note">${escapeHtml(forecast.comparisonScope)}</p>`;
+
+    const details = data.details || [];
+    document.getElementById('financeDetails').innerHTML = details.length ? details.map(row => `
+      <tr>
+        <td>${escapeHtml(row.month)}</td>
+        <td><strong>${escapeHtml(row.name)}</strong></td>
+        <td>${escapeHtml(row.channel)}</td>
+        <td>${escapeHtml(row.sku)}</td>
+        <td><span class="badge badge--neutral" style="font-size:10px; padding:3px 8px;">${escapeHtml(row.status)}</span></td>
+        <td class="num-right">${escapeHtml(number(row.events))}</td>
+        <td class="num-right">${escapeHtml(usd(row.unitPriceUsd))}</td>
+        <td class="num-right">${escapeHtml(usd(row.amountUsd))}</td>
+        <td class="num-right">${escapeHtml(brl(row.amountBrl))}</td>
+        <td title="${escapeHtml(row.note)}">${escapeHtml(row.source)}</td>
+        <td>${escapeHtml(row.confidence)}</td>
+      </tr>`).join('') : '<tr><td colspan="11" class="finance-empty">Nenhum item disponível.</td></tr>';
+
+    const auditCards = [
+      ['Fonte financeira', 'Snapshot do painel', 'Prints recebidos em 21/07; sem transações linha a linha.'],
+      ['Total mensal', usd((data.monthly || []).reduce((sum, item) => sum + item.totalUsd, 0)), 'Junho + julho reconciliados com o cabeçalho do painel.'],
+      ['Delta de arredondamento', usd(audit.panelVsBreakdownDeltaUsd), `${usd(audit.breakdownSumUsd)} no detalhamento × ${usd(audit.panelSnapshotUsd)} no painel.`],
+      ['Cobertura operacional', 'API atualizada', `${number(snapshot.contacts)} contatos e ${number(snapshot.workflows && snapshot.workflows.total)} workflows auditados em modo leitura.`]
+    ];
+    document.getElementById('financeAudit').innerHTML = auditCards.map(([label, value, note]) => `
+      <div class="bcard">
+        <div class="finance-kpi-label">${escapeHtml(label)}</div>
+        <div class="finance-audit-value">${escapeHtml(value)}</div>
+        <div class="finance-audit-note">${escapeHtml(note)}</div>
+      </div>`).join('');
+  }
+
+  renderFinanceiro();
 
   /* ── Mobile tap tooltips (info-tip) ── */
   if ('ontouchstart' in window || navigator.maxTouchPoints > 0) {
