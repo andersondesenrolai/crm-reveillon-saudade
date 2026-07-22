@@ -38,6 +38,7 @@ html, body { max-width: 100vw; }
 
 body {
   font-family: 'Inter', sans-serif;
+  font-size: 16px;
   background: rgb(11,9,24);
   color: var(--white);
   min-height: 100vh;
@@ -327,7 +328,8 @@ main {
 }
 
 .section-subtitle {
-  font-size: 15px;
+  font-size: 17px;
+  line-height: 1.55;
   color: rgba(255,255,255,0.55);
   margin-bottom: 32px;
   max-width: 640px;
@@ -346,14 +348,14 @@ main {
 table {
   width: 100%;
   border-collapse: collapse;
-  font-size: 13px;
+  font-size: 15px;
 }
 
 thead th {
   text-align: left;
   padding: 12px 16px;
   font-weight: 600;
-  font-size: 10px;
+  font-size: 12px;
   text-transform: uppercase;
   letter-spacing: 1px;
   color: rgba(255,255,255,0.45);
@@ -365,7 +367,7 @@ tbody td {
   padding: 14px 16px;
   border-bottom: 1px solid rgba(255,255,255,0.04);
   color: rgba(255,255,255,0.75);
-  font-size: 13px;
+  font-size: 15px;
 }
 
 tbody tr:last-child td { border-bottom: none; }
@@ -377,7 +379,7 @@ tbody tr:nth-child(even):hover td { background: rgba(255,255,255,0.04); }
 
 tfoot td {
   padding: 14px 16px;
-  font-size: 13px;
+  font-size: 15px;
   color: rgba(255,255,255,0.75);
   background: rgba(255,255,255,0.03);
   border-top: 1px solid rgba(255,255,255,0.1);
@@ -1008,7 +1010,7 @@ td.num-right {
 .callout {
   border-radius: var(--radius);
   padding: 20px 24px;
-  font-size: 14px;
+  font-size: 16px;
   line-height: 1.6;
   margin-top: 24px;
 }
@@ -1437,16 +1439,17 @@ td.num-right {
 .mobile-tip.show { opacity: 1; }
 
 /* ─── FINANCEIRO ─── */
-.finance-kpi-grid { display:grid; grid-template-columns:repeat(4,1fr); gap:12px; }
+.finance-kpi-grid { display:grid; grid-template-columns:repeat(3,1fr); gap:12px; }
 .finance-kpi { min-height:132px; display:flex; flex-direction:column; justify-content:space-between; }
 .finance-kpi-label { color:rgba(255,255,255,.48); font-size:11px; font-weight:600; letter-spacing:.06em; text-transform:uppercase; }
 .finance-kpi-value { margin:10px 0 6px; font:700 29px 'Space Grotesk',sans-serif; letter-spacing:-.04em; }
-.finance-kpi-note { color:rgba(255,255,255,.45); font-size:11px; line-height:1.45; }
+.finance-kpi-note { color:rgba(255,255,255,.52); font-size:13px; line-height:1.5; }
 .finance-split { display:grid; grid-template-columns:1.15fr .85fr; gap:16px; }
 .finance-month-list { display:grid; gap:18px; margin-top:22px; }
-.finance-month { display:grid; grid-template-columns:72px 1fr 78px; align-items:center; gap:12px; }
-.finance-month-label { color:rgba(255,255,255,.65); font-size:12px; font-weight:600; }
-.finance-month-value { color:rgba(255,255,255,.62); font:500 12px 'Space Grotesk',sans-serif; text-align:right; }
+.finance-month { position:relative; display:grid; grid-template-columns:72px 1fr 88px; align-items:center; gap:12px; border-radius:8px; cursor:help; }
+.finance-month:focus-visible { outline:2px solid var(--roxo); outline-offset:5px; }
+.finance-month-label { color:rgba(255,255,255,.72); font-size:14px; font-weight:600; }
+.finance-month-value { color:rgba(255,255,255,.72); font:500 14px 'Space Grotesk',sans-serif; text-align:right; }
 .finance-bar-track { height:22px; overflow:hidden; border-radius:6px; background:rgba(255,255,255,.05); }
 .finance-bar-fill { height:100%; display:flex; min-width:2px; border-radius:inherit; overflow:hidden; }
 .finance-segment { height:100%; }
@@ -1457,8 +1460,15 @@ td.num-right {
 .finance-segment--operacional { background:var(--gray-stage); }
 .finance-segment--nao_atribuido { background:var(--amber); }
 .finance-legend { display:flex; gap:14px; flex-wrap:wrap; margin-top:20px; }
-.finance-legend-item { display:inline-flex; align-items:center; gap:6px; color:rgba(255,255,255,.55); font-size:11px; }
+.finance-legend-item { display:inline-flex; align-items:center; gap:6px; color:rgba(255,255,255,.62); font-size:13px; }
 .finance-legend-dot { width:8px; height:8px; border-radius:2px; }
+.finance-month-breakdown { position:absolute; z-index:30; top:calc(100% + 10px); left:84px; width:290px; padding:14px 16px; display:grid; gap:9px; border:1px solid rgba(123,104,238,.38); border-radius:12px; background:rgba(21,16,43,.98); box-shadow:0 16px 44px rgba(0,0,0,.5); opacity:0; visibility:hidden; transform:translateY(-5px); pointer-events:none; transition:opacity .18s ease,transform .18s ease,visibility .18s ease; }
+.finance-month:hover .finance-month-breakdown,.finance-month:focus .finance-month-breakdown { opacity:1; visibility:visible; transform:translateY(0); }
+.finance-month-breakdown-title { color:var(--white); font-size:14px; font-weight:700; }
+.finance-month-breakdown-row { display:flex; align-items:center; justify-content:space-between; gap:14px; color:rgba(255,255,255,.72); font-size:13px; }
+.finance-month-breakdown-name { display:inline-flex; align-items:center; gap:7px; }
+.finance-month-breakdown-row strong { color:var(--white); font:600 13px 'Space Grotesk',sans-serif; white-space:nowrap; }
+.finance-month-breakdown-total { padding-top:9px; border-top:1px solid rgba(255,255,255,.1); }
 .finance-comparison { display:grid; gap:10px; margin-top:18px; }
 .finance-comparison-row { display:flex; align-items:baseline; justify-content:space-between; gap:12px; padding:10px 0; border-bottom:1px solid rgba(255,255,255,.06); }
 .finance-comparison-row:last-child { border-bottom:none; }
@@ -1466,7 +1476,7 @@ td.num-right {
 .finance-comparison-value { font:600 15px 'Space Grotesk',sans-serif; text-align:right; }
 .finance-audit-grid { display:grid; grid-template-columns:repeat(4,1fr); gap:12px; }
 .finance-audit-value { margin-top:7px; font:600 17px 'Space Grotesk',sans-serif; }
-.finance-audit-note { margin-top:5px; color:rgba(255,255,255,.45); font-size:10px; line-height:1.45; }
+.finance-audit-note { margin-top:5px; color:rgba(255,255,255,.52); font-size:12px; line-height:1.5; }
 .finance-empty { color:rgba(255,255,255,.55); padding:20px; text-align:center; }
 
 /* ─── COMPACT HISTORY / DISCLOSURES ─── */
@@ -1513,8 +1523,13 @@ td.num-right {
 }
 @media (max-width:768px) {
   .finance-split { grid-template-columns:1fr; }
-  .finance-month { grid-template-columns:58px 1fr 68px; gap:8px; }
-  .finance-month-label, .finance-month-value { font-size:10px; }
+  .finance-month { grid-template-columns:64px 1fr 78px; gap:8px; }
+  .finance-month-label, .finance-month-value { font-size:12px; }
+  .finance-month-breakdown { position:static; grid-column:1 / -1; width:auto; margin-top:4px; display:none; opacity:1; visibility:visible; transform:none; }
+  .finance-month:hover .finance-month-breakdown,.finance-month:focus .finance-month-breakdown { display:grid; }
+}
+@media (max-width:600px) {
+  .finance-kpi-grid, .finance-audit-grid { grid-template-columns:1fr; gap:8px; }
 }
 @media (max-width:480px) {
   .finance-kpi-grid, .finance-audit-grid { grid-template-columns:1fr; gap:8px; }
@@ -1534,7 +1549,8 @@ td.num-right {
 .mb-32 { margin-bottom: 32px; }
 .text-center { text-align: center; }
 .text-muted { color: rgba(255,255,255,0.55); }
-.text-sm { font-size: 13px; }
+.text-sm { font-size: 15px; line-height:1.55; }
+.finance-split + .subsection-title { margin-top: 56px; }
 .text-xs { font-size: 11px; }
 .fw-700 { font-weight: 700; }
 .flex-center { display: flex; align-items: center; justify-content: center; }
@@ -2339,8 +2355,8 @@ td.num-right {
         <div class="metric-label">Clicaram no link <span class="info-tip" data-tip="Contatos que clicaram no link de compra dentro do email de recuperação.">&#x24D8;</span></div>
       </div>
       <div class="bcard metric-card">
-        <div class="metric-value num" style="color:rgba(255,255,255,0.35);">R$ 0</div>
-        <div class="metric-label">Custo <span class="info-tip" data-tip="Email não tem custo por disparo na plataforma ROI Scale.">&#x24D8;</span></div>
+        <div class="metric-value num" style="color:rgba(255,255,255,0.35);">A conciliar</div>
+        <div class="metric-label">Custo <span class="info-tip" data-tip="O painel registra cobrança de email, mas o vínculo desta régua com o custo ainda depende do extrato detalhado.">&#x24D8;</span></div>
       </div>
     </div>
 
@@ -2441,7 +2457,7 @@ td.num-right {
             <td><span class="badge badge--neutral" style="font-size:10px; padding:3px 8px;">Auto</span></td>
             <td class="num-right">1.009</td>
             <td class="num-right" style="color: var(--green);">~87,4%</td>
-            <td class="num-right">R$ 0</td>
+            <td class="num-right">A conciliar</td>
           </tr>
           <tr>
             <td>Email</td>
@@ -2449,7 +2465,7 @@ td.num-right {
             <td><span class="badge badge--neutral" style="font-size:10px; padding:3px 8px;">Auto</span></td>
             <td class="num-right">—</td>
             <td class="num-right">—</td>
-            <td class="num-right">R$ 0</td>
+            <td class="num-right">A conciliar</td>
           </tr>
         </tbody>
         <tfoot>
@@ -2463,7 +2479,7 @@ td.num-right {
       </table>
       </div>
     </div>
-    <p class="note">Custos das campanhas são estimativas históricas por mensagem. A conciliação definitiva entre Marketing e Utility depende do CSV detalhado da subconta; serviços de email aparecem separadamente na aba Financeiro.</p>
+    <p class="note">Os custos realizados agora usam o CSV detalhado e o vínculo Wallet ref ↔ mensagem da API. Valores sem campanha individual comprovada permanecem marcados como “a conciliar” na aba Financeiro.</p>
 
     <div class="bcard proposal-card mt-32">
       <div class="proposal-label">Próxima campanha</div>
@@ -2688,60 +2704,73 @@ td.num-right {
 <section id="financeiro" class="tab-content">
   <div class="section-inner">
     <h2 class="section-title">Financeiro</h2>
-    <p class="section-subtitle">Consumo da subconta, classificação de custos e trilha de auditoria em uma base normalizada.</p>
+    <p class="section-subtitle">Custos da operação atual, campanhas realizadas, fee e retorno em uma leitura única e auditável.</p>
 
-    <div class="callout callout--amber mt-32">
-      <strong>Conciliação preliminar.</strong> O snapshot disponível consolida WhatsApp sem separar mensagens Marketing e Utility. Os totais abaixo são exatos para o painel recebido; a divisão entre campanhas e automações permanece pendente até o CSV detalhado da subconta.
+    <div class="callout callout--roxo mt-32" id="financeStatusCallout">
+      <strong>Carregando conciliação financeira…</strong>
     </div>
 
     <div class="finance-kpi-grid mt-24" id="financeKpis" aria-live="polite"></div>
 
     <div class="finance-split mt-32">
       <div class="bcard">
-        <h3>Consumo mensal</h3>
-        <p class="text-sm text-muted mt-16">Distribuição do painel por competência, em USD.</p>
+        <h3>Consumo mensal por finalidade</h3>
+        <p class="text-sm text-muted mt-16">Competência da Wallet em USD; as cores separam campanha, automação, infraestrutura e operação.</p>
         <div class="finance-month-list" id="financeMonthly"></div>
         <div class="finance-legend" id="financeLegend"></div>
       </div>
       <div class="bcard">
         <div style="display:flex; align-items:center; justify-content:space-between; gap:12px;">
-          <h3>Orçamento × realizado</h3>
-          <span class="badge badge--neutral">Aguardando baseline</span>
+          <h3>Receita recuperada × fee</h3>
+          <span class="badge badge--green" id="financeComparisonBadge">ROI acumulativo</span>
         </div>
         <div class="finance-comparison" id="financeComparison"></div>
       </div>
     </div>
 
-    <h3 class="subsection-title mt-48">Detalhamento normalizado</h3>
-    <p class="text-sm text-muted mb-16">Cada linha preserva fonte, nível de confiança e pendências de classificação.</p>
+    <h3 class="subsection-title mt-48">Custos por campanha realizada</h3>
+    <p class="text-sm text-muted mb-16">Somente custos com vínculo comprovado entre a referência da Wallet e a mensagem registrada na API.</p>
     <div class="bcard" style="padding:0;">
       <div class="table-scroll">
-        <table>
+        <table style="min-width:1120px;">
           <thead>
             <tr>
-              <th>Competência</th>
-              <th>Campanha / workflow</th>
-              <th>Canal</th>
-              <th>SKU</th>
-              <th>Status</th>
-              <th style="text-align:right">Eventos</th>
-              <th style="text-align:right">Unit. USD</th>
-              <th style="text-align:right">Total USD</th>
-              <th style="text-align:right">Total BRL</th>
-              <th>Fonte</th>
-              <th>Confiança</th>
+              <th>Período</th><th>Campanha / onda</th><th>Canal</th><th style="text-align:right">Eventos cobrados</th><th style="text-align:right">Custo BRL</th><th style="text-align:right">Custo USD</th><th style="text-align:right">Receita</th><th>Status</th><th>Fonte</th><th>Confiança</th>
             </tr>
           </thead>
-          <tbody id="financeDetails"></tbody>
+          <tbody id="financeCampaigns"></tbody>
         </table>
       </div>
     </div>
 
+    <h3 class="subsection-title mt-48">Custos permanentes e valores a conciliar</h3>
+    <p class="text-sm text-muted mb-16">Infraestrutura, IA, automações e cobranças sem campanha comprovada ficam fora do custo das ondas.</p>
+    <div class="bcard" style="padding:0;">
+      <div class="table-scroll">
+        <table style="min-width:880px;">
+          <thead><tr><th>Finalidade</th><th>Classificação</th><th style="text-align:right">Custo BRL</th><th style="text-align:right">Custo USD</th><th>Leitura</th><th>Confiança</th></tr></thead>
+          <tbody id="financePermanent"></tbody>
+        </table>
+      </div>
+    </div>
+
+    <details class="section-disclosure mt-48">
+      <summary>
+        <div><div class="disclosure-title">Auditoria por produto e competência</div><div class="disclosure-meta">Abra para consultar todos os SKUs, volumes e preços unitários do CSV.</div></div>
+      </summary>
+      <div class="disclosure-body">
+        <div class="table-scroll mt-16">
+          <table style="min-width:1120px;">
+            <thead><tr><th>Mês</th><th>Produto</th><th>Canal</th><th>SKU</th><th>Status</th><th style="text-align:right">Eventos</th><th style="text-align:right">Unit. USD</th><th style="text-align:right">Total USD</th><th style="text-align:right">Total BRL</th><th>Fonte</th></tr></thead>
+            <tbody id="financeDetails"></tbody>
+          </table>
+        </div>
+      </div>
+    </details>
+
     <h3 class="subsection-title mt-48">Auditoria e cobertura</h3>
     <div class="finance-audit-grid mt-16" id="financeAudit"></div>
-    <div class="callout callout--roxo mt-24">
-      <strong>Próximo passo de dados:</strong> exportar Wallet Transactions desta location para reconciliar Marketing × Utility, atribuir custos a campanhas e automações e comparar com um orçamento aprovado equivalente.
-    </div>
+    <div class="callout callout--amber mt-24" id="financeAuditNote"><strong>Nota de auditoria:</strong> carregando dados.</div>
   </div>
 </section>
 
@@ -2781,7 +2810,7 @@ td.num-right {
         <p><strong>Recuperação de carrinho ainda não é recorrente.</strong> O próximo ciclo precisa de aprovação explícita antes de ativar novamente WhatsApp e email.</p>
       </div>
       <div class="bcard insight-card insight-amber">
-        <p><strong>A atribuição financeira do WhatsApp está incompleta.</strong> Sem o CSV detalhado, não é possível separar com segurança Marketing de Utility.</p>
+        <p><strong>O split de Marketing e Utility foi concluído.</strong> Restam US$ 25,34 de Marketing da gestão atual sem nome individual de campanha comprovado; o valor fica separado, sem rateio artificial.</p>
       </div>
       <div class="bcard insight-card insight-amber">
         <p><strong>Tracking de clique do WhatsApp depende de Trigger Links.</strong> A próxima onda deve nascer com links rastreáveis e critério de conversão definido.</p>
@@ -2812,7 +2841,7 @@ td.num-right {
           <li><span class="check check--done">&#x2714;</span>Consolidar o primeiro ciclo de campanhas no dashboard</li>
           <li><span class="check check--done">&#x2714;</span>Atualizar pipeline, contatos, workflows e valores pela API</li>
           <li><span class="check"></span>Reauditar tags antigas antes de mantê-las como pendência</li>
-          <li><span class="check"></span>Exportar Wallet Transactions detalhado do Réveillon</li>
+          <li><span class="check check--done">&#x2714;</span>Exportar e conciliar Wallet Transactions detalhado do Réveillon</li>
           <li><span class="check"></span>Validar o funcionamento real do bot e mapear integração com Instagram</li>
         </ul>
       </div>
@@ -2861,8 +2890,8 @@ td.num-right {
             <td><span class="prio-alta">Alta</span></td>
           </tr>
           <tr>
-            <td>Exportar billing detalhado para separar Marketing × Utility</td>
-            <td><span class="prio-alta">Alta</span></td>
+            <td>Reexportar a próxima janela desde 31/05 para fechar a diferença de competência de US$ 10,99 em junho</td>
+            <td><span class="prio-media">Média</span></td>
           </tr>
           <tr>
             <td>Definir próxima campanha e reformular a abordagem de Mornos</td>
@@ -2926,6 +2955,12 @@ td.num-right {
   tabs.forEach(btn => btn.addEventListener('click', () => switchTab(btn.dataset.tab)));
   mmBtns.forEach(btn => btn.addEventListener('click', () => switchTab(btn.dataset.tab)));
   document.querySelectorAll('.internal-tab-link').forEach(btn => btn.addEventListener('click', () => switchTab(btn.dataset.tab)));
+
+  const initialTab = new URLSearchParams(window.location.search).get('tab');
+  if (initialTab && document.getElementById(initialTab)) {
+    switchTab(initialTab);
+    window.scrollTo({ top: 0, left: 0, behavior: 'auto' });
+  }
 
   // Hamburger toggle
   if (hamburger) {
@@ -3037,23 +3072,25 @@ td.num-right {
     if (!data || !kpiRoot) return;
 
     const summary = data.summary || {};
-    const snapshot = data.operationalSnapshot || {};
     const audit = data.audit || {};
     const forecast = data.forecast || {};
     const brl = value => value == null ? '—' : new Intl.NumberFormat('pt-BR', { style: 'currency', currency: 'BRL' }).format(value);
     const usd = value => value == null ? '—' : `US$ ${new Intl.NumberFormat('pt-BR', { minimumFractionDigits: 2, maximumFractionDigits: 2 }).format(value)}`;
     const number = value => value == null ? '—' : new Intl.NumberFormat('pt-BR').format(value);
+    const pct = value => value == null ? '—' : `${new Intl.NumberFormat('pt-BR', { maximumFractionDigits: 1 }).format(value)}%`;
     const escapeHtml = value => String(value == null ? '—' : value).replace(/[&<>'"]/g, char => ({ '&':'&amp;', '<':'&lt;', '>':'&gt;', "'":'&#39;', '"':'&quot;' }[char]));
+    const brlFromUsd = value => value == null ? null : value * data.exchange.usdToBrl;
+    const labels = { campanhas:'Campanhas', automacoes:'Automações', infraestrutura:'Infraestrutura', ia:'IA', operacional:'Operacional', nao_atribuido:'A conciliar' };
+    const statusLabel = value => ({ realizada:'Realizada', a_conciliar:'A conciliar', wallet_reconciliado:'Reconciliado', historico_anterior_gestao:'Histórico anterior', campanha_lancamento:'Campanha', automacao_transacional:'Automação', infraestrutura:'Infraestrutura', atendimento_ia:'Atendimento IA', operacao_sem_vinculo:'Sem vínculo individual' }[value] || String(value || '—').replaceAll('_', ' '));
+    const permanentUsd = (summary.automationsUsd || 0) + (summary.infrastructureUsd || 0) + (summary.aiUsd || 0) + (summary.operationalUsd || 0);
 
     const cards = [
-      ['Consumo total', usd(summary.totalUsd), `${brl(summary.totalBrl)} pela PTAX de ${data.exchange.date.split('-').reverse().join('/')}`],
-      ['WhatsApp sem split', usd(summary.unattributedUsd), 'Marketing + Utility; classificação pendente'],
-      ['Serviços de email', usd(summary.operationalUsd), 'Custo operacional consolidado no painel'],
-      ['Conversation AI', usd(summary.aiUsd), 'Conversation and Voice AI'],
-      ['Campanhas', '—', 'Aguarda split Marketing × Utility'],
-      ['Automações', '—', 'Aguarda CSV detalhado da location'],
-      ['Contatos', number(snapshot.contacts), 'Snapshot da API em 21/07/2026'],
-      ['Workflows', number(snapshot.workflows && snapshot.workflows.total), `${number(snapshot.workflows && snapshot.workflows.published)} publicados · ${number(snapshot.workflows && snapshot.workflows.draft)} rascunhos`]
+      ['Operação atual', brl(summary.currentBrl), `${usd(summary.currentUsd)} desde o início da gestão`],
+      ['Campanhas realizadas', brl(brlFromUsd(summary.campaignsUsd)), `${usd(summary.campaignsUsd)} com atribuição comprovada`],
+      ['Custos permanentes', brl(brlFromUsd(permanentUsd)), `${usd(permanentUsd)} em automações, infraestrutura, IA e operação`],
+      ['A conciliar', brl(brlFromUsd(summary.unattributedUsd)), `${usd(summary.unattributedUsd)} sem campanha individual comprovada`],
+      ['Histórico pré-gestão', brl(brlFromUsd(summary.historicalUsd)), `${usd(summary.historicalUsd)} fora da leitura da operação atual`],
+      ['Total auditado', brl(summary.totalBrl), `${usd(summary.totalUsd)} na Wallet do período`]
     ];
     kpiRoot.innerHTML = cards.map(([label, value, note]) => `
       <div class="bcard finance-kpi">
@@ -3068,23 +3105,48 @@ td.num-right {
       const [year, month] = value.split('-').map(Number);
       return new Intl.DateTimeFormat('pt-BR', { month: 'short', year: '2-digit', timeZone: 'UTC' }).format(new Date(Date.UTC(year, month - 1, 1))).replace('.', '');
     };
-    document.getElementById('financeMonthly').innerHTML = months.map(item => `
-      <div class="finance-month">
-        <div class="finance-month-label">${escapeHtml(monthLabel(item.month))}</div>
-        <div class="finance-bar-track" title="${escapeHtml(usd(item.totalUsd))}">
-          <div class="finance-bar-fill" style="width:${Math.max((item.totalUsd / maxMonth) * 100, 1)}%">
-            <span class="finance-segment finance-segment--nao_atribuido" style="width:100%"></span>
-          </div>
-        </div>
-        <div class="finance-month-value">${escapeHtml(usd(item.totalUsd))}</div>
-      </div>`).join('');
-    document.getElementById('financeLegend').innerHTML = '<span class="finance-legend-item"><span class="finance-legend-dot finance-segment--nao_atribuido"></span>WhatsApp sem atribuição + demais itens do painel</span>';
+    document.getElementById('financeMonthly').innerHTML = months.map(item => {
+      const segments = Object.entries(item.categories || {}).filter(([, value]) => value > 0).map(([category, value]) => `<span class="finance-segment finance-segment--${escapeHtml(category)}" style="width:${item.totalUsd ? ((value / item.totalUsd) * 100).toFixed(3) : 0}%" title="${escapeHtml(labels[category] || category)}: ${escapeHtml(usd(value))}"></span>`).join('');
+      const label = monthLabel(item.month);
+      const tooltipId = `finance-month-tooltip-${item.month}`;
+      const breakdownRows = Object.entries(item.categories || {}).filter(([, value]) => value > 0).map(([category, value]) => `<div class="finance-month-breakdown-row"><span class="finance-month-breakdown-name"><span class="finance-legend-dot finance-segment--${escapeHtml(category)}"></span>${escapeHtml(labels[category] || category)}</span><strong>${escapeHtml(usd(value))}</strong></div>`).join('');
+      return `<div class="finance-month" tabindex="0" aria-describedby="${escapeHtml(tooltipId)}" aria-label="${escapeHtml(`Detalhamento de ${label}: ${usd(item.totalUsd)}`)}"><div class="finance-month-label">${escapeHtml(label)}</div><div class="finance-bar-track"><div class="finance-bar-fill" style="width:${Math.max((item.totalUsd / maxMonth) * 100, 1).toFixed(2)}%">${segments}</div></div><div class="finance-month-value">${escapeHtml(usd(item.totalUsd))}</div><div class="finance-month-breakdown" id="${escapeHtml(tooltipId)}" role="tooltip"><div class="finance-month-breakdown-title">Detalhamento · ${escapeHtml(label)}</div>${breakdownRows}<div class="finance-month-breakdown-row finance-month-breakdown-total"><span>Total do mês</span><strong>${escapeHtml(usd(item.totalUsd))}</strong></div></div></div>`;
+    }).join('');
+    const activeCategories = [...new Set(months.flatMap(item => Object.keys(item.categories || {}).filter(key => item.categories[key] > 0)))];
+    document.getElementById('financeLegend').innerHTML = activeCategories.map(category => `<span class="finance-legend-item"><span class="finance-legend-dot finance-segment--${escapeHtml(category)}"></span>${escapeHtml(labels[category] || category)}</span>`).join('');
 
-    document.getElementById('financeComparison').innerHTML = `
-      <div class="finance-comparison-row"><span class="finance-comparison-label">Orçamento aprovado</span><span class="finance-comparison-value">Não localizado</span></div>
-      <div class="finance-comparison-row"><span class="finance-comparison-label">Realizado no painel</span><span class="finance-comparison-value">${escapeHtml(usd(summary.totalUsd))}</span></div>
-      <div class="finance-comparison-row"><span class="finance-comparison-label">Variação</span><span class="finance-comparison-value">Aguarda orçamento</span></div>
-      <p class="finance-kpi-note">${escapeHtml(forecast.comparisonScope)}</p>`;
+    const comparisonBadge = document.getElementById('financeComparisonBadge');
+    if (data.brandKey === 'reveillon') {
+      const paidFee = (data.fees || []).filter(item => item.status === 'pago').reduce((sum, item) => sum + item.amountBrl, 0);
+      const scheduledFee = (data.fees || []).filter(item => item.status !== 'pago').reduce((sum, item) => sum + item.amountBrl, 0);
+      const accumulatedFee = paidFee + scheduledFee;
+      const recovered = data.recoveredRevenueBrl || 0;
+      document.getElementById('financeComparison').innerHTML = `
+        <div class="finance-comparison-row"><span class="finance-comparison-label">Receita recuperada</span><span class="finance-comparison-value" style="color:var(--green);">${escapeHtml(brl(recovered))}</span></div>
+        <div class="finance-comparison-row"><span class="finance-comparison-label">Fee pago até agora</span><span class="finance-comparison-value">${escapeHtml(brl(paidFee))}</span></div>
+        <div class="finance-comparison-row"><span class="finance-comparison-label">ROI atual sobre fee pago</span><span class="finance-comparison-value" style="color:var(--roxo);">${escapeHtml(paidFee ? (recovered / paidFee).toFixed(1).replace('.', ',') + 'x' : '—')}</span></div>
+        <div class="finance-comparison-row"><span class="finance-comparison-label">Fee acumulado após 30/07</span><span class="finance-comparison-value">${escapeHtml(brl(accumulatedFee))}</span></div>
+        <div class="finance-comparison-row"><span class="finance-comparison-label">ROI projetado sem nova receita</span><span class="finance-comparison-value">${escapeHtml(accumulatedFee ? (recovered / accumulatedFee).toFixed(1).replace('.', ',') + 'x' : '—')}</span></div>`;
+      comparisonBadge.textContent = 'ROI acumulativo';
+      comparisonBadge.className = 'badge badge--green';
+    } else {
+      const withinRange = forecast.actualMatchedBrl >= forecast.min && forecast.actualMatchedBrl <= forecast.max;
+      document.getElementById('financeComparison').innerHTML = `
+        <div class="finance-comparison-row"><span class="finance-comparison-label">Faixa prevista · WhatsApp</span><span class="finance-comparison-value">${escapeHtml(brl(forecast.min))}–${escapeHtml(brl(forecast.max).replace('R$', '').trim())}</span></div>
+        <div class="finance-comparison-row"><span class="finance-comparison-label">Realizado equivalente</span><span class="finance-comparison-value" style="color:var(--green);">${escapeHtml(brl(forecast.actualMatchedBrl))}</span></div>
+        <div class="finance-comparison-row"><span class="finance-comparison-label">Variação vs. ponto médio</span><span class="finance-comparison-value">${escapeHtml(brl(forecast.varianceVsMidpointBrl))} · ${escapeHtml(pct(forecast.variancePct))}</span></div>
+        <p class="finance-kpi-note">${escapeHtml(forecast.comparisonScope)}</p>`;
+      comparisonBadge.textContent = withinRange ? 'Dentro da faixa' : 'Fora da faixa';
+      comparisonBadge.className = `badge ${withinRange ? 'badge--green' : 'badge--amber'}`;
+    }
+
+    const campaigns = data.campaignLedger || [];
+    document.getElementById('financeCampaigns').innerHTML = campaigns.length ? campaigns.map(row => `
+      <tr><td class="mono">${escapeHtml(row.period)}</td><td><strong>${escapeHtml(row.name)}</strong><div class="finance-audit-note">${escapeHtml(row.note)}</div></td><td>${escapeHtml(row.channels)}</td><td class="num-right mono">${escapeHtml(number(row.events))}</td><td class="num-right mono"><strong>${escapeHtml(brl(row.amountBrl))}</strong></td><td class="num-right mono">${escapeHtml(usd(row.amountUsd))}</td><td class="num-right mono">${escapeHtml(brl(row.revenueBrl))}</td><td><span class="badge ${row.status === 'realizada' ? 'badge--green' : 'badge--amber'}" style="font-size:9px;padding:3px 7px;">${escapeHtml(statusLabel(row.status))}</span></td><td>${escapeHtml(row.source)}</td><td><span class="badge ${row.confidence === 'alta' ? 'badge--green' : 'badge--amber'}" style="font-size:9px;padding:3px 7px;">${escapeHtml(row.confidence)}</span></td></tr>`).join('') : '<tr><td colspan="10" class="finance-empty">Nenhuma campanha conciliada.</td></tr>';
+
+    const permanent = data.permanentCosts || [];
+    document.getElementById('financePermanent').innerHTML = permanent.length ? permanent.map(row => `
+      <tr><td><strong>${escapeHtml(row.name)}</strong></td><td>${escapeHtml(labels[row.category] || row.category)}</td><td class="num-right mono"><strong>${escapeHtml(brl(row.amountBrl))}</strong></td><td class="num-right mono">${escapeHtml(usd(row.amountUsd))}</td><td>${escapeHtml(row.note)}</td><td><span class="badge ${row.confidence === 'alta' ? 'badge--green' : 'badge--amber'}" style="font-size:9px;padding:3px 7px;">${escapeHtml(row.confidence)}</span></td></tr>`).join('') : '<tr><td colspan="6" class="finance-empty">Nenhum custo permanente.</td></tr>';
 
     const details = data.details || [];
     document.getElementById('financeDetails').innerHTML = details.length ? details.map(row => `
@@ -3093,20 +3155,20 @@ td.num-right {
         <td><strong>${escapeHtml(row.name)}</strong></td>
         <td>${escapeHtml(row.channel)}</td>
         <td>${escapeHtml(row.sku)}</td>
-        <td><span class="badge badge--neutral" style="font-size:10px; padding:3px 8px;">${escapeHtml(row.status)}</span></td>
+        <td><span class="badge badge--neutral" style="font-size:10px; padding:3px 8px;">${escapeHtml(statusLabel(row.status))}</span></td>
         <td class="num-right">${escapeHtml(number(row.events))}</td>
         <td class="num-right">${escapeHtml(usd(row.unitPriceUsd))}</td>
         <td class="num-right">${escapeHtml(usd(row.amountUsd))}</td>
         <td class="num-right">${escapeHtml(brl(row.amountBrl))}</td>
-        <td title="${escapeHtml(row.note)}">${escapeHtml(row.source)}</td>
-        <td>${escapeHtml(row.confidence)}</td>
-      </tr>`).join('') : '<tr><td colspan="11" class="finance-empty">Nenhum item disponível.</td></tr>';
+        <td>${escapeHtml(row.source)}</td>
+      </tr>`).join('') : '<tr><td colspan="10" class="finance-empty">Nenhum item disponível.</td></tr>';
 
+    const range = audit.dateMin && audit.dateMax ? `${new Date(audit.dateMin).toLocaleDateString('pt-BR')}–${new Date(audit.dateMax).toLocaleDateString('pt-BR')}` : '—';
     const auditCards = [
-      ['Fonte financeira', 'Snapshot do painel', 'Prints recebidos em 21/07; sem transações linha a linha.'],
-      ['Total mensal', usd((data.monthly || []).reduce((sum, item) => sum + item.totalUsd, 0)), 'Junho + julho reconciliados com o cabeçalho do painel.'],
-      ['Delta de arredondamento', usd(audit.panelVsBreakdownDeltaUsd), `${usd(audit.breakdownSumUsd)} no detalhamento × ${usd(audit.panelSnapshotUsd)} no painel.`],
-      ['Cobertura operacional', 'API atualizada', `${number(snapshot.contacts)} contatos e ${number(snapshot.workflows && snapshot.workflows.total)} workflows auditados em modo leitura.`]
+      ['Fonte financeira', `${number(audit.transactions)} transações`, `${(data.sources || []).length} arquivo(s), IDs deduplicados e hashes registrados.`],
+      ['Janela do CSV', range, 'Competência efetivamente presente no export recebido.'],
+      ['Histórico separado', usd(summary.historicalUsd), 'Anterior ao início da gestão; não compõe os KPIs da operação atual.'],
+      ['Atribuição', usd((summary.campaignsUsd || 0) + (summary.automationsUsd || 0)), 'Wallet ref ↔ mensagem da API; sem rateio artificial.']
     ];
     document.getElementById('financeAudit').innerHTML = auditCards.map(([label, value, note]) => `
       <div class="bcard">
@@ -3114,6 +3176,17 @@ td.num-right {
         <div class="finance-audit-value">${escapeHtml(value)}</div>
         <div class="finance-audit-note">${escapeHtml(note)}</div>
       </div>`).join('');
+
+    const statusCallout = document.getElementById('financeStatusCallout');
+    const auditNote = document.getElementById('financeAuditNote');
+    if (data.brandKey === 'reveillon') {
+      const panel = (audit.panelSnapshots || [])[0];
+      statusCallout.innerHTML = `<strong>Conciliação concluída:</strong> ${escapeHtml(number(audit.transactions))} transações únicas, com split de Marketing, Utility, email, verificação e IA. A leitura executiva separa ${escapeHtml(usd(summary.historicalUsd))} anteriores à gestão dos ${escapeHtml(usd(summary.currentUsd))} da operação atual.`;
+      auditNote.innerHTML = panel ? `<strong>Fronteira de competência:</strong> o painel mensal mostra ${escapeHtml(usd(panel.amountUsd))} em junho e o CSV iniciado em 01/06 soma ${escapeHtml(usd(panel.csvAmountUsd))}, diferença de ${escapeHtml(usd(Math.abs(panel.deltaUsd)))}. Para fechar essa borda, o próximo export deve começar em 31/05; nenhum valor foi distribuído artificialmente.` : '<strong>Nota de auditoria:</strong> CSV e API conciliados.';
+    } else {
+      statusCallout.innerHTML = `<strong>Base financeira reconciliada:</strong> os arquivos recebidos são partes contínuas do mesmo export. A leitura executiva separa ${escapeHtml(usd(summary.historicalUsd))} anteriores à gestão dos ${escapeHtml(usd(summary.currentUsd))} da operação atual.`;
+      auditNote.innerHTML = `<strong>Nota de auditoria:</strong> os custos da Wallet estão confirmados até ${escapeHtml(new Date(audit.dateMax).toLocaleDateString('pt-BR'))}. A renovação do token MPF é necessária apenas para nomear individualmente os follow-ups ainda marcados como “a conciliar”.`;
+    }
   }
 
   renderFinanceiro();
